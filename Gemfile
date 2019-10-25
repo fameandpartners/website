@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '2.3.8'
+ruby '2.3.3'
 
 gem 'rails', '~> 3.2.22.5'
 gem 'test-unit' # test-unit is required by Rails 3, and Ruby 2.3 is harsher on dependency requirements
-gem 'pg'
+gem 'pg', '0.19.0'
 gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
@@ -108,7 +108,8 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-gem 'unicorn'
+#gem 'unicorn'
+gem 'puma', '~> 2.3.2'
 gem 'aws-healthcheck'
 
 group :assets do
