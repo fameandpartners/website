@@ -164,9 +164,9 @@ jobs:
       - run:
           name: Start test
           command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
               curl -X POST --data "{"text": 'product'}" https://1880671636622620.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
-            elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
+            elif [ "${CIRCLE_BRANCH}" == "pr" ]; then
               curl -X POST --data "{"text": 'qa4'}" https://1880671636622620.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
             fi
           when: on_success
