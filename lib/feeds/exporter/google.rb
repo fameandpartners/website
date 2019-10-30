@@ -94,11 +94,7 @@ module Feeds
 
       # @override
       def product_description(item)
-        if item[:description].nil?
           CGI.escapeHTML(item[:description])
-        else
-          CGI.escapeHTML(nil)
-        end
       end
 
       def storage_credentials

@@ -53,21 +53,16 @@ module Feeds
     end
 
     def product_scope
-      puts "dddddddddd: " + Spree::Product.not_deleted.available(nil, nil).to_sql.to_s
       Spree::Product.active
-
     end
 
     def get_items
-      # test = Spree::Product.active
-      # print "aaaaaaaaaa"+test.to_a.to_s
       items = []
       index = 0
       total = product_scope.count
 
       logger.info "Fetching Items. Total: #{total}"
 
-      # product_scope.each do |product|
       product_scope.find_each(batch_size: 10) do |product|
         index += 1
         logger_product_name  = "Product: #{product.name}"
