@@ -53,10 +53,14 @@ module Feeds
     end
 
     def product_scope
+      puts "dddddddddd: " + Spree::Product.not_deleted.available(nil, nil).to_sql.to_s
       Spree::Product.active
+
     end
 
     def get_items
+      # test = Spree::Product.active
+      # print "aaaaaaaaaa"+test.to_a.to_s
       items = []
       index = 0
       total = product_scope.count
@@ -99,6 +103,11 @@ module Feeds
         sale_price = curation.discount_price_in(current_site_version.currency)
       end
 
+      curation_description = curation.description
+      if curation.description.blank?
+        curation_description = product.description
+      end
+
       item = HashWithIndifferentAccess.new(
         # variant:                 variant,
         path:                    helpers.collection_product_path(curation),
@@ -108,7 +117,7 @@ module Feeds
         product_sku:             product.sku,
         availability:            availability,
         title:                   "#{color_presentation} #{curation.name || product.name}",
-        description:             helpers.strip_tags(curation.description || product.description),
+        description:             helpers.strip_tags(curation_description),
         price:                   original_price,
         sale_price:              sale_price,
         google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',
