@@ -12,6 +12,9 @@ Spree.config do |config|
   config.allow_ssl_in_production = !!ENV.fetch('SPREE_SSL_IN_PRODUCTION') { false }
   config.allow_ssl_in_staging = false
   config.allow_ssl_in_development_and_test = Features.active?(:force_sitewide_ssl)
+  if RUBY_PLATFORM =~ /mswin|mingw|cygwin/i
+    config.allow_ssl_in_development_and_test = false
+  end
 
   config.products_per_page = 1000 # disable pagination at all
   config.allow_backorders = false # allow order items out of stock - we have 90% items by order
