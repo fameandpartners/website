@@ -2,7 +2,7 @@
   = f.field_container :fabric,  class: ['checkbox'] do
     = f.label :fabric, t(:fabric)
     br
-    = f.collection_select(:fabric_id, Fabric.all, :id, :name, {}, disabled: @fabric_product.persisted?)
+    = f.collection_select(:fabric_id, Fabric.order('name ASC'), :id, :name, {}, disabled: @fabric_product.persisted?)
     = f.error_message_on :fabric
 
   = f.field_container :description, class: ['checkbox'] do
