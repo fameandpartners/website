@@ -18,7 +18,7 @@ class ItemReturnSerializer < ActiveModel::Serializer
     end
 
     def request_id
-      ReturnRequestItem.find_by_id(object.request_id).order_return_request_id
+      ReturnRequestItem.find_by_id(object.request_id)&.order_return_request_id
     end
 
 end

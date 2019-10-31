@@ -1,0 +1,37 @@
+ruby:
+  order_price = spree_order.total
+  order_total_text = Spree::Money.new(spree_order.total, currency: 'USD').to_s
+  single_installment_text = Spree::Money.new(spree_order.total / 4, currency: 'USD').to_s
+
+head
+  /script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.2.4/webcomponents-loader.js" type="application/javascript"
+  /script src="https://widgets.quadpay.com/es5/quadpay-widget-2.2.3.js" type="application/javascript"
+  /script src="https://widgets.quadpay.com/quadpay-widget-2.2.3.js" async=true type="application/javascript"
+
+h4
+  | Four fortnightly interest free payments totalling #{order_total_text}
+.payments.hidden-xs.hidden-sm
+  .payment
+    .to-pay = single_installment_text
+    .time-period First payment
+  .separator +
+  .payment
+    .to-pay = single_installment_text
+    .time-period In 2 weeks
+  .separator +
+  .payment
+    .to-pay = single_installment_text
+    .time-period In 4 weeks
+  .separator +
+  .payment
+    .to-pay = single_installment_text
+    .time-period In 6 weeks
+.payments.row.hidden-md.hidden-lg
+  .payment.col-xs-12
+    .to-pay = single_installment_text
+    .time-period Fortnightly
+/= render "checkout/v1/spree/checkout/quadpay_widget"
+p.hint Place your order and you will complete your purchase via the Quadpay pop-up.
+= link_to quadpay_express_path(payment_method_id:@quad_pay_method.id), method: :post, id: 'quadpay_button', alt: 'QuadPay', class: 'js-returns-abc-quadpay payment-cta btn btn-black btn-block btn-md' do
+    | Pay with
+    =<> image_tag 'checkout/logo/quadpay-white-logo.svg'

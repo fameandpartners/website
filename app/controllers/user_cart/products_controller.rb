@@ -28,13 +28,17 @@ class UserCart::ProductsController < UserCart::BaseController
       end
     end
     if @current_order
-      @current_order.last_ip_address = ip_address
+      unless @current_order.last_ip_address == ip_address
+        @current_order.last_ip_address = ip_address
+        @current_order.save!
+      end
       session[:order_id] = @current_order.id
     end
     @current_order
   end
 
   def create
+    puts "create: " + session[:order_id]&.to_s
     cart_populator = UserCart::Populator.new(
       order: current_order_for_add_to_cart(true),
       site_version: current_site_version,
@@ -81,6 +85,7 @@ class UserCart::ProductsController < UserCart::BaseController
         }
       end
     end
+    puts "create: end " + session[:order_id]&.to_s
   end
 
   def create_line_item_making_option

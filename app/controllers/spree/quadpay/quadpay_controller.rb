@@ -23,7 +23,7 @@ module Spree
           if previous_qp_order_obj
             quadpay_order_info = payment_method.find_order(previous_qp_order_obj.qp_order_id)
             if quadpay_order_info && quadpay_order_info["orderStatus"] == "Approved"
-              if complete_order_and_payment(previous_payment, @order, !signed_in?)
+              if Spree::QuadPayHelper::complete_order_and_payment(previous_payment, @order, !signed_in?)
                 flash[:commerce_tracking] = 'nothing special'
                 session[:successfully_ordered] = true
                 flash['order_completed'] = true
@@ -131,7 +131,7 @@ module Spree
           quadpay_order_info = payment_method.find_order(qp_order_obj.qp_order_id)
 
           if quadpay_order_info['orderStatus'] == 'Approved'
-            if complete_order_and_payment(previous_payment, @order, !signed_in?)
+            if Spree::QuadPayHelper::complete_order_and_payment(payment, @order, !signed_in?)
               flash[:commerce_tracking] = 'nothing special'
               session[:successfully_ordered] = true
               flash['order_completed'] = true
