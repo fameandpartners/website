@@ -5,7 +5,7 @@
 namespace :quad_pay_tasks do
   task sync_orders: :environment do
     #qpms = Spree::BillingIntegration::QuadPayCheckout.available_on_front_end.active
-    payment_method = Spree::Gateway::QuadpayPayment.payment_method
+    payment_method = Spree::Gateway::QuadpayPayment.payment_method #quadpaypaymentmethod
     #qpms = Spree::PaymentMethod.available_on_front_end.active
     #if qpm = qpms.first
     pid = payment_method.id
@@ -66,13 +66,14 @@ namespace :quad_pay_tasks do
     payment.failure
   end
 
+  #15.minute.ago
   def quadpay_payments(method_id)
     Spree::Payment.
       readonly(false).
       where(:payment_method_id => method_id).
       joins(:order).
       where('spree_payments.state not IN (?)', %w(failed completed)).
-      where('spree_payments.created_at >= ?', 10.days.ago)
+      where('spree_payments.created_at >= ?', 2.days.ago)
   end
 
   def complete_payment(payment, order)
