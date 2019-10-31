@@ -1,5 +1,3 @@
-require "time"
-
 module Spree
   module Quadpay
     class QuadpayController < ApplicationController
@@ -25,8 +23,16 @@ module Spree
           if previous_qp_order_obj
             quadpay_order_info = payment_method.find_order(previous_qp_order_obj.qp_order_id)
             if quadpay_order_info && quadpay_order_info["orderStatus"] == "Approved"
-              complete_payment(previous_payment)
-              return
+              if Spree::QuadPayHelper::complete_order_and_payment(previous_payment, @order, !signed_in?)
+                flash[:commerce_tracking] = 'nothing special'
+                session[:successfully_ordered] = true
+                flash['order_completed'] = true
+                flash[:notice] = "The order has been paid successfully."
+                return redirect_to completion_route
+              else
+                flash[:error] = "Quapay payment failed(4), order number: #{@order.number}"
+                return redirect_to checkout_state_path(@order.state)
+              end
             end
           end
 
@@ -81,37 +87,37 @@ module Spree
         order_path(@order)
       end
 
-      def complete_payment(payment)
-        puts "complete payment: " + (payment.id.nil? ? "" : payment.id.to_s)
-        puts "payment state: " + payment.state.to_s
-        update_order_steps
-        puts "payment:" + payment.id.to_s + " response code1:" + (payment.response_code.nil? ? "" : payment.response_code)
-        payment.update_qp_order_id
-        if payment.state != "completed"
-          payment.complete!
-        end
-        puts "payment:" + payment.id.to_s + " response code2:" + (payment.response_code.nil? ? "" : payment.response_code)
-
-        #@order.next
-        # 强制完成
-        if @order.state != "complete"
-          @order.completed_at = Time.now.utc.to_s
-          @order.state = "complete"
-          @order.save!
-        end
-        puts "payment:" + payment.id.to_s + " response code3:" + (payment.response_code.nil? ? "" : payment.response_code)
-        if @order.completed?
-          OrderBotWorker.perform_async(@order.id)
-          flash[:commerce_tracking] = 'nothing special'
-          session[:successfully_ordered] = true
-          flash['order_completed'] = true
-          flash[:notice] = "The order has been paid successfully."
-          return redirect_to completion_route
-        else
-          flash[:error] = "Quapay payment failed(4), order number: #{@order.number}"
-          return redirect_to checkout_state_path(@order.state)
-        end
-      end
+      # def complete_payment(payment)
+      #   puts "complete payment: " + (payment.id.nil? ? "" : payment.id.to_s)
+      #   puts "payment state: " + payment.state.to_s
+      #   update_order_steps
+      #   puts "payment:" + payment.id.to_s + " response code1:" + (payment.response_code.nil? ? "" : payment.response_code)
+      #   payment.update_qp_order_id
+      #   if payment.state != "completed"
+      #     payment.complete!
+      #   end
+      #   puts "payment:" + payment.id.to_s + " response code2:" + (payment.response_code.nil? ? "" : payment.response_code)
+      #
+      #   #@order.next
+      #   # 强制完成
+      #   if @order.state != "complete"
+      #     @order.completed_at = Time.now.utc.to_s
+      #     @order.state = "complete"
+      #     @order.save!
+      #   end
+      #   puts "payment:" + payment.id.to_s + " response code3:" + (payment.response_code.nil? ? "" : payment.response_code)
+      #   if @order.completed?
+      #     OrderBotWorker.perform_async(@order.id)
+      #     flash[:commerce_tracking] = 'nothing special'
+      #     session[:successfully_ordered] = true
+      #     flash['order_completed'] = true
+      #     flash[:notice] = "The order has been paid successfully."
+      #     return redirect_to completion_route
+      #   else
+      #     flash[:error] = "Quapay payment failed(4), order number: #{@order.number}"
+      #     return redirect_to checkout_state_path(@order.state)
+      #   end
+      # end
 
       def confirm
 
@@ -125,7 +131,16 @@ module Spree
           quadpay_order_info = payment_method.find_order(qp_order_obj.qp_order_id)
 
           if quadpay_order_info['orderStatus'] == 'Approved'
-            complete_payment(payment)
+            if Spree::QuadPayHelper::complete_order_and_payment(payment, @order, !signed_in?)
+              flash[:commerce_tracking] = 'nothing special'
+              session[:successfully_ordered] = true
+              flash['order_completed'] = true
+              flash[:notice] = "The order has been paid successfully."
+              return redirect_to completion_route
+            else
+              flash[:error] = "Quapay payment failed(8), order number: #{@order.number}"
+              return redirect_to checkout_state_path(@order.state)
+            end
           else
             flash[:error] = "Quapay payment failed(1), order number: #{@order.number}(#{qp_order_obj.qp_order_id})"
             return redirect_to checkout_state_path(@order.state)
@@ -148,68 +163,68 @@ module Spree
         # puts params.to_s
       end
 
-      def update_order_steps
-        order = current_order
-
-        if !signed_in? # 'personal'
-          update_order_personal_info
-        end
-
-        if !order.has_checkout_step?("address") || order.bill_address.blank? || order.shipping_address.blank?
-          update_order_addresses
-        end
-
-        order.state = 'payment'
-        order.save
-      end
-
-      protected
-
-      def update_order_personal_info
-        order = current_order
-
-        user = order.user
-        if user.nil?
-          build_user(order)
-        end
-
-        complete_order_step(order, 'cart')
-      end
-
-      # populate shipping/billing with paypal info, in case of 'cart checkout' / 'checkout from page'
-      def update_order_addresses
-        order = current_order
-        if order.bill_address.blank? && !order.shipping_address.blank?
-          order.bill_address = order.shipping_address
-          complete_order_step(order, 'address')
-        end
-      end
-
-      # state machine states have
-      def complete_order_step(order, order_step)
-        original_state = order.state
-        order.state = order_step
-
-        if !order.next
-          order.state = original_state
-          order.save(validate: false) # store data from paypal. user will be redirect to 'personal' tab
-        end
-      end
-
-      private
-      def build_user(order)
-        if order
-          Spree::User.new(
-            email: order.email,
-            first_name: order.shipping_address.firstname,
-            last_name: order.shipping_address.lastname,
-            password: order.number,
-            password_confirmation: order.number
-          )
-        else
-          Spree::User.new()
-        end
-      end
+      # def update_order_steps
+      #   order = current_order
+      #
+      #   if !signed_in? # 'personal'
+      #     update_order_personal_info
+      #   end
+      #
+      #   if !order.has_checkout_step?("address") || order.bill_address.blank? || order.shipping_address.blank?
+      #     update_order_addresses
+      #   end
+      #
+      #   order.state = 'payment'
+      #   order.save
+      # end
+      #
+      # protected
+      #
+      # def update_order_personal_info
+      #   order = current_order
+      #
+      #   user = order.user
+      #   if user.nil?
+      #     build_user(order)
+      #   end
+      #
+      #   complete_order_step(order, 'cart')
+      # end
+      #
+      # # populate shipping/billing with paypal info, in case of 'cart checkout' / 'checkout from page'
+      # def update_order_addresses
+      #   order = current_order
+      #   if order.bill_address.blank? && !order.shipping_address.blank?
+      #     order.bill_address = order.shipping_address
+      #     complete_order_step(order, 'address')
+      #   end
+      # end
+      #
+      # # state machine states have
+      # def complete_order_step(order, order_step)
+      #   original_state = order.state
+      #   order.state = order_step
+      #
+      #   if !order.next
+      #     order.state = original_state
+      #     order.save(validate: false) # store data from paypal. user will be redirect to 'personal' tab
+      #   end
+      # end
+      #
+      # private
+      # def build_user(order)
+      #   if order
+      #     Spree::User.new(
+      #       email: order.email,
+      #       first_name: order.shipping_address.firstname,
+      #       last_name: order.shipping_address.lastname,
+      #       password: order.number,
+      #       password_confirmation: order.number
+      #     )
+      #   else
+      #     Spree::User.new()
+      #   end
+      # end
     end
   end
 end

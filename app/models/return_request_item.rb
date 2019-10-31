@@ -108,6 +108,7 @@ class ReturnRequestItem < ActiveRecord::Base
   end
 
   def push_return_event
+    puts "push_return_event"
     ReturnRequestItemMapping.new(return_request_item: self).call
   # Note: I had troubles with debug because of this rescue
   # Probably we need to handle this exception another way
@@ -124,16 +125,23 @@ class ReturnRequestItem < ActiveRecord::Base
       @rri = return_request_item
       @logger = Logger.new(logdev)
       @logger.formatter = LogFormatter.terminal_formatter
+      puts "ReturnRequestItemMapping initialize"
     end
 
     def call
+      puts "ReturnRequestItemMapping call"
+      puts "rri.action: " + rri.action.to_s
       return :no_action_required if rri.action == "keep"
+      puts "ReturnRequestItemMapping keep"
 
       requested_item_return = ItemReturn.where(line_item_id: rri.line_item_id).first.presence || ItemReturnEvent.creation.create(line_item_id: rri.line_item_id).item_return
+      puts "llllllll line_item_id: "
+      puts "llllllll line_item_id: " + rri.line_item_id.to_s
 
       existing_event = requested_item_return.events.return_requested.detect { |re| re.request_id == rri.id }
       if existing_event.present?
         logger.warn "SKIPPING return_requested - #{rri.line_item_id}, Event Exists"
+        puts "SKIPPING return_requested - #{rri.line_item_id}, Event Exists"
         return
       end
 
@@ -162,8 +170,35 @@ class ReturnRequestItem < ActiveRecord::Base
         acceptance_status:      :requested,
       }
 
+      puts "attrs: " + attrs.to_s
+      puts "order:" + rri.order.number.to_s
+      payments = rri.order.payments
+      payments = payments.to_a
+      payments.each do |py|
+        puts "payment id: " + py.id.to_s
+        puts "payment source type: " + py.source_type.to_s
+        puts "payment state: " + py.state.to_s
+      end
+
+      payments = rri.order.payments.completed
+      payments = payments.to_a
+      payments.each do |py|
+        puts "payment11 id: " + py.id.to_s
+        puts "payment11 source type: " + py.source_type.to_s
+        puts "payment11 state: " + py.state.to_s
+      end
+
+      puts "kkkkkkkk"
+
       if rri.order.payments.completed.last
+        puts "iiiiiiii1"
         payment = ::Reports::Payments::PaymentReportPresenter.from_payment(rri.order.payments.last)
+        puts "iiiiiiii2"
+        puts "iiiiiiii3" + payment.currency.to_s
+        puts "payment_type: " + payment.payment_type.to_s
+        puts "payment_date: " + payment.payment_date.to_s
+        puts "amount_in_cents: " + payment.amount_in_cents.to_s
+        puts "transaction_id: " + payment.transaction_id.to_s
         attrs.merge!(
           order_payment_method: payment.payment_type,
           order_payment_date:   payment.payment_date,
@@ -172,8 +207,9 @@ class ReturnRequestItem < ActiveRecord::Base
           order_payment_ref:    payment.transaction_id,
         )
       end
-
+      puts "pppppppp attrs: " + attrs.to_s
       requested_item_return.events.return_requested.create(attrs)
+      puts "pppppppplll attrs: " + attrs.to_s
     end
   end
 end
