@@ -27,8 +27,7 @@ module Spree
       all.select do |p|
         p.active &&
         (p.display_on == display_on.to_s || p.display_on.blank?) &&
-        #(p.environment == Rails.env || p.environment.blank?)
-		(p.environment == 'production' || p.environment.blank?)
+        (p.environment == Rails.env || p.environment.blank?)
       end
     end
 

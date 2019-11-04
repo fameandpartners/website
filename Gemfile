@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.3.8'
 
 gem 'rails', '~> 3.2.22.5'
 gem 'test-unit' # test-unit is required by Rails 3, and Ruby 2.3 is harsher on dependency requirements
-gem 'pg', '0.19.0'
+gem 'pg'
 gem 'slim'
 gem 'slim-rails'
 gem 'configatron'
@@ -71,26 +71,28 @@ gem 'koala'
 
 gem 'google_drive', '1.0.0', require: false # parse spread sheet
 
-gem 'canonical-rails', :path => './vendor/cache/canonical-rails-03adacb2db44'
+gem 'canonical-rails', github: 'jumph4x/canonical-rails'
 
-gem 'spree', :path => './vendor/cache/spree-7d19c8933042'
+gem 'spree', :github => 'spree/spree', :branch => '1-3-stable'
 
 #payments
 gem 'pin_payment'
-gem 'stripe', :path => './vendor/cache/stripe-ruby-465da7a9978c'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 # spree extensions for authentication
 gem 'spree_auth_devise',
-    :path => './vendor/cache/spree_auth_devise-c4466de37486'
+    :github => 'spree/spree_auth_devise',
+    :branch => '1-3-stable',
+    :ref => 'c4466de3748618971dc401e6e30c0d87f2b9c143'
 
-gem 'spree_social', :path => './vendor/cache/spree_social-e0b45b4dc9a9'
+gem 'spree_social', :github => 'spree/spree_social', :branch => '1-3-stable'
 
 
 # spree extensions for payments
-gem 'spree_gateway', :path => './vendor/cache/spree_gateway-1e07f8e5835c'
-gem 'spree_paypal_express', :path => './vendor/cache/better_spree_paypal_express-478b27281f7e'
+gem 'spree_gateway', :github => 'spree/spree_gateway', :branch => '1-3-stable'
+gem 'spree_paypal_express', github: 'fameandpartners/better_spree_paypal_express', branch: '1-3-stable'
 
-gem 'spree_essentials', :path => './vendor/cache/spree_essentials-e930a71a3c50'
+gem 'spree_essentials', :git => 'git://github.com/bbtfr/spree_essentials.git', :branch => '1.3.x'
 
 # utils
 
@@ -108,8 +110,7 @@ gem 'spree_masterpass', :path => './spree_masterpass'
 gem 'term-ansicolor',   :require => false
 gem 'ruby-progressbar', :require => false
 
-#gem 'unicorn'
-gem 'puma', '~> 2.3.2'
+gem 'unicorn'
 gem 'aws-healthcheck'
 
 group :assets do
