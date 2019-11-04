@@ -1,0 +1,7 @@
+- content_for :page_title do
+  | Making Options
+
+= render 'admin_ui/grid/grid_collection_filters', collection_url: making_options_path
+.row : .col-lg-12
+  = link_to 'Add new make option', new_making_option_path, class: 'btn btn-primary'
+= render 'admin_ui/grid/paginated_collection_grid'

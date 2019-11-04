@@ -82,6 +82,7 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :fabrics
+  resources :making_options
 
   root to: 'dashboard#index'
 
