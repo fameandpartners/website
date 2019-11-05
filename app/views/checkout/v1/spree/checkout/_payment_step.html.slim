@@ -33,11 +33,21 @@ javascript:
           a data-toggle="tab" href="#afterpay" aria-controls="afterpay" role="tab"
             i.icon.icon-afterpay-symbol
             | Afterpay
+      - if @quad_pay_method
+        li.payment-option
+          a data-toggle="tab" href="#quadpay" aria-controls="quadpay" role="tab"
+            i.icon.icon-quadpay = image_tag 'checkout/logo/quadpay-logo-black.svg'
+            | Quadpay
       - if @pay_pal_method
         li.payment-option
           a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
             i.fa.fa-paypal
             | Paypal
+      /- if @quad_pay_method
+        li.payment-option
+          a data-toggle="tab" href="#quadpay" aria-controls="quadpay" role="tab"
+            i.fa.fa-paypal
+            | Quadpay
 
 .row
   .col-xs-12
@@ -63,12 +73,22 @@ javascript:
         #afterpay.panel-afterpay.text-center.payment-selected.tab-pane role="tabpanel"
           = render 'checkout/v1/spree/checkout/payment/afterpay', spree_order: @order, afterpay_method: @afterpay_method
 
+      - if @quad_pay_method
+        #quadpay.panel-quadpay.text-center.payment-selected.tab-pane role="tabpanel"
+          = render 'spree/checkout/payment/quadpay', spree_order: @order, quadpay_method: @quadpay_method
+
       - if @pay_pal_method
         #paypal.text-center.payment-selected.tab-pane role="tabpanel"
           p.hint Place your order and you will complete your purchase via the Paypal.
           = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'js-returns-abc-paypal payment-cta btn btn-black btn-block btn-md' do
             | Pay with
             =<> image_tag('checkout/logo/paypal-logo-white.png')
+
+      /- if @quad_pay_method
+        #quadpay.text-center.payment-selected.tab-pane role="tabpanel"
+          p.hint Place your order and you will complete your purchase via the Quadpay.
+          = link_to quadpay_express_path(payment_method_id:@quad_pay_method.id), method: :post, id: 'quadpay_button', alt: 'Quadpay', class: 'js-returns-abc-paypal payment-cta btn btn-black btn-block btn-md' do
+            | Pay with quadpay
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the

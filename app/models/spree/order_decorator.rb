@@ -25,7 +25,17 @@ Spree::Order.class_eval do
   end
 
   scope :hydrated, -> { includes(HYDRATED_INCLUDES) }
-
+  #add from quadpay master　　临时注释
+ # def available_payment_methods
+  #   qpm_ids = Spree::BillingIntegration::QuadPayCheckout.active.ids
+  #   @available_payment_methods ||=
+  #     if qpm_ids.any? && (self.total < Spree::Config.quad_pay_min_amount.to_f || self.total > Spree::Config.quad_pay_max_amount.to_f)
+  #       Spree::PaymentMethod.available_on_front_end.where.not(id: qpm_ids)
+  #     else
+  #       Spree::PaymentMethod.available_on_front_end
+  #     end
+  # end
+  
   def hydrate
     ActiveRecord::Associations::Preloader.new(self, HYDRATED_INCLUDES).run
   end
