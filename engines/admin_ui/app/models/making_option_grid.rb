@@ -12,7 +12,7 @@ class MakingOptionGrid
 
   column :id do |cv|
     format(cv.id) do
-      link_to(cv.id, edit_making_option_path(cv))
+      link_to(cv.id, edit_content_making_option_path(cv))
     end
   end
 

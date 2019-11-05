@@ -1,6 +1,7 @@
 require 'datagrid'
 
 module AdminUi
+  module Content
     class MakingOptionsController < AdminUi::ApplicationController
       def index
         @collection = MakingOptionGrid.new(params[:making_option_grid])
@@ -25,7 +26,7 @@ module AdminUi
         @form = Forms::MakingOptionForm.new(MakingOption.new)
         if @form.validate(params[:forms_making_option]) && @form.save
           message = { success: "Make option '#{@form.model.code}' successfully created" }
-          redirect_to edit_making_option_path(@form.model), flash: message
+          redirect_to edit_content_making_option_path(@form.model), flash: message
         else
           render :new
         end
@@ -44,10 +45,11 @@ module AdminUi
         @form = Forms::MakingOptionForm.new(@making_option)
         if @form.validate(params[:forms_making_option]) && @form.save
           message = { success: "Make Option '#{@making_option.code}' sucessfully updated"}
-          redirect_to making_options_path, flash: message
+          redirect_to content_making_options_path, flash: message
         else
           render :edit
         end
       end
     end
+  end
 end

@@ -62,6 +62,7 @@ AdminUi::Engine.routes.draw do
   namespace :content do
     resources :pages
     resources :upc, only: [:index, :new, :create]
+    resources :making_options, except: [:show, :destroy]
   end
 
   namespace :logistics do
@@ -82,7 +83,6 @@ AdminUi::Engine.routes.draw do
   end
 
   resources :fabrics
-  resources :making_options
 
   root to: 'dashboard#index'
 
