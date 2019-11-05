@@ -2,7 +2,7 @@ Spree::CheckoutController.class_eval do
 
   before_filter :before_masterpass
   skip_before_filter :check_registration
-
+  #before_filter :confirm_quad_pay, only: [:update]
   before_filter def switch_views_version
     prepend_view_path Rails.root.join('app/views/checkout/v1')
   end
@@ -20,6 +20,7 @@ Spree::CheckoutController.class_eval do
   }
 
   def edit
+    puts "edit: " + session[:order_id]&.to_s
     prepare_order
     find_payment_methods
     update_line_item_delivery
@@ -276,8 +277,9 @@ Spree::CheckoutController.class_eval do
     @order.ship_address ||= build_default_address
   end
 
-  private
+  #add from quadpay master
 
+  private
   def object_params
     # For payment step, filter order parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
     if (@order.has_checkout_step?("payment") && @order.payment?) || (params[:state] == "masterpass" && @order.has_checkout_step?("address"))
@@ -406,6 +408,9 @@ Spree::CheckoutController.class_eval do
 
     @afterpay_method = @order.available_payment_methods.detect do |method|
       method.method_type == 'afterpay' && current_site_version.currency == method.currency
+    end
+    @quad_pay_method = @order.available_payment_methods.detect do |method|
+      method.method_type == 'quadpay' && current_site_version.currency == method.currency
     end
   end
 

@@ -53,6 +53,7 @@ RSpec.describe GlobalSku, type: :model do
                      style_name:      'Cool Bae',
                      size:            'US0/AU4',
                      colour_name:     'Charpinkle',
+                     real_color_name:     'Charpinkle',
                      height:          'Petite',
                      personalization: line_item_personalization,
                      item:            item

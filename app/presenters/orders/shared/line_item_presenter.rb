@@ -44,6 +44,10 @@ module Orders
         colour.try(:presentation) || 'Unknown Color'
       end
 
+      def real_color_name
+        colour.try(:name) || 'Unknown Color'
+      end
+
       def fabric
         item.fabric
       end

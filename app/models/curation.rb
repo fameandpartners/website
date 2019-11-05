@@ -50,11 +50,14 @@ class Curation < ActiveRecord::Base
   def fabric_product
     pid_components = pid.split('~')
 
-    product.fabric_products.find do |fp| 
-      should_split = /^\d+-\d+$/ =~ fp.fabric.name
-      fabric_components = should_split ? fp.fabric.name.split('-') : [fp.fabric.name]
-
-      fabric_components.all? {|c| pid_components.include?(c) }
+    product.fabric_products.find do |fp|
+      if pid_components.include?(fp.fabric.name)
+        true
+      else
+        should_split = /^\d+-\d+$/ =~ fp.fabric.name
+        fabric_components = should_split ? fp.fabric.name.split('-') : [fp.fabric.name]
+        fabric_components.all? {|c| pid_components.include?(c) }
+      end
     end
   end
 
