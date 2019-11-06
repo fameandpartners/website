@@ -63,26 +63,28 @@ Spree::CheckoutController.class_eval do
         sign_in :spree_user, registration.user
         session[:new_user_created] = true
         puts "UUUUUUUUUUUU registration.new_user_created?"
-        puts "UUUUUUUUUUUU session[:new_user_created]#{session[:new_user_created]}"
+
       end
       if !registration.successfull?
         @order.state = 'masterpass' if params[:state] == 'masterpass'
         respond_with(@order) do |format|
           format.html { render :edit }
           format.js   { render 'spree/checkout/registration/failed' }
+          puts "UUUUUUUUUUUU render failed js"
         end
-        puts "UUUUUUUUUUUU registration.successfull?"
-        puts "UUUUUUUUUUUU @order.state#{@order.state}"
+        puts "UUUUUUUUUUUU registration.successfull?#{registration.successfull?}"
+        puts "UUUUUUUUUUUU @order.state1 #{@order.state}"
         puts "UUUUUUUUUUUU params[:state]#{params[:state]}"
         return
       end
       remove_ineligible_promotions
       @order.reload
-      puts "UUUUUUUUUUUU  @order.state == 'address' || @order.state == 'masterpass'"
+      puts "UUUUUUUUUUUU   @order.state == 'address' || @order.state == 'masterpass' end "
     end
 
     if @order.update_attributes(object_params)
-      puts "UUUUUUUUUUUU after @order.update_attributes(object_params)"
+      puts "UUUUUUUUUUUU  @order.update_attributes(object_params) #{object_params}"
+
       fire_event('spree.checkout.update')
       puts "UUUUUUUUUUUU  after fire_event"
       if object_params.key?(:coupon_code)
@@ -108,7 +110,7 @@ Spree::CheckoutController.class_eval do
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
         puts "UUUUUUUUUUUU after @credit_card_gateway"
         if @order.line_items.length < 1
-            render status: 402, json: {
+          render status: 402, json: {
             :message => 'StaleCart'
           }
           return
@@ -129,10 +131,10 @@ Spree::CheckoutController.class_eval do
       else
 
         if @order.line_items.length < 1
-            render status: 402, json: {
+          render status: 402, json: {
             :message => 'StaleCart'
           }
-            puts "UUUUUUUUUUUU @order.line_items.length#{@order.line_items.length}"
+          puts "UUUUUUUUUUUU @order.line_items.length#{@order.line_items.length}"
           return
         end
         #go here for stripeypay
@@ -146,6 +148,7 @@ Spree::CheckoutController.class_eval do
           return
         end
       end
+      puts "UUUUUUUUUUUU after @credit_card_gateway #{@credit_card_gateway.type}"
       # with 'cart checkout' by paypal express we can return to fill address
       if @order.state == 'payment' && @order.has_checkout_step?('payment')
         state_callback(:before)
@@ -170,45 +173,46 @@ Spree::CheckoutController.class_eval do
         if !session[:masterpass_data].blank?
           session[:masterpass_data] = nil
           flash[:commerce_tracking] = 'masterpass_ordered'
+          puts "UUUUUUUUUUUU session[:masterpass_data].blank? #{session[:masterpass_data].blank?}"
         end
 
         OrderBotWorker.perform_async(@order.id)
-        puts "UUUUUUUUUUUU after OrderBotWorker"
+        puts "UUUUUUUUUUUU after OrderBotWorker @order.id #{@order.id}"
         # Klaviyo placed order
         order_line_items = @order.line_items || []
         @klaviyo = Klaviyo::Client.new(configatron.klaviyo_token)
         @klaviyo.track('Placed Order',
-          email: try_spree_current_user&.email || @order.email,
-          properties: {
-            "$event_id": @order.id,
-            "$value": @order.total,
-            "ItemNames": order_line_items.map { |line_item| line_item.product.name },
-            "Items": order_line_items.map do |line_item|
-              {
-                "ProductID": line_item.product.id,
-                "SKU": line_item.product.sku,
-                "ProductName": line_item.product.name,
-                "Quantity": line_item.quantity,
-                "ItemPrice": line_item.price,
-                "RowTotal": line_item.price * line_item.quantity
-              }
-            end
-          },
-          time: Time.now
+                       email: try_spree_current_user&.email || @order.email,
+                       properties: {
+                         "$event_id": @order.id,
+                         "$value": @order.total,
+                         "ItemNames": order_line_items.map { |line_item| line_item.product.name },
+                         "Items": order_line_items.map do |line_item|
+                           {
+                             "ProductID": line_item.product.id,
+                             "SKU": line_item.product.sku,
+                             "ProductName": line_item.product.name,
+                             "Quantity": line_item.quantity,
+                             "ItemPrice": line_item.price,
+                             "RowTotal": line_item.price * line_item.quantity
+                           }
+                         end
+                       },
+                       time: Time.now
         )
         puts "UUUUUUUUUUUU after  Klaviyo::Client.new"
         order_line_items.each do |line_item|
           @klaviyo.track('Ordered Product',
-            email: try_spree_current_user&.email || @order.email,
-            properties: {
-              "$event_id": line_item.id,
-              "$value": line_item.price * line_item.quantity,
-              "ProductID": line_item.product.id,
-              "SKU": line_item.product.sku,
-              "ProductName": line_item.product.name,
-              "Quantity": line_item.quantity,
-            },
-            time: Time.now
+                         email: try_spree_current_user&.email || @order.email,
+                         properties: {
+                           "$event_id": line_item.id,
+                           "$value": line_item.price * line_item.quantity,
+                           "ProductID": line_item.product.id,
+                           "SKU": line_item.product.sku,
+                           "ProductName": line_item.product.name,
+                           "Quantity": line_item.quantity,
+                         },
+                         time: Time.now
           )
         end
 
@@ -219,7 +223,7 @@ Spree::CheckoutController.class_eval do
         end
       else
         # Handle the payment failures, such as 'invalid', 'insufficient Funds', 'declined'
-        puts "UUUUUUUUUUUU  @order.state1" +  @order.state
+        puts "UUUUUUUUUUUU  @order.state2 " +  @order.state
         @order.state = 'masterpass' if params[:state] == 'masterpass'
         respond_with(@order) do |format|
           format.html{ redirect_to checkout_state_path(@order.state) }
@@ -229,7 +233,7 @@ Spree::CheckoutController.class_eval do
 
     else
       @order.state = 'masterpass' if params[:state] == 'masterpass'
-      puts "UUUUUUUUUUUU  @order.state2" +  @order.state
+      puts "UUUUUUUUUUUU  @order.state3 " +  @order.state
       respond_with(@order) do |format|
         format.html { render :edit }
         format.js { render 'spree/checkout/update/failed' }
