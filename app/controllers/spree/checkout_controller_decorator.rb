@@ -99,6 +99,7 @@ Spree::CheckoutController.class_eval do
             puts "UUUUUUUUUUUU reder success js"
           end
         else
+          puts "UUUUUUUUUUUU object_params.key?(:coupon_code) else"
           respond_with(@order) do |format|
             format.js{ render 'spree/checkout/coupon_code/failure' }
             puts "UUUUUUUUUUUU reder failure js"
@@ -109,9 +110,13 @@ Spree::CheckoutController.class_eval do
       end
       puts "UUUUUUUUUUUU  after object_params.key?(:coupon_code)#{object_params.key?(:coupon_code)}"
 
+      puts "UUUUUUUUUUUU  before @credit_card_gateway.type "
+      puts "UUUUUUUUUUUU  before @credit_card_gateway.type #{@credit_card_gateway.type}"
+      puts "UUUUUUUUUUUU  after @credit_card_gateway.type"
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
         puts "UUUUUUUUUUUU after @credit_card_gateway"
         if @order.line_items.length < 1
+          puts "UUUUUUUUUUUU @order.line_items.length small 1"
           render status: 402, json: {
             :message => 'StaleCart'
           }
@@ -119,8 +124,10 @@ Spree::CheckoutController.class_eval do
         end
         #take this path for pin, this code only survives while we transistion to stripe
         if @order.next
+          puts "UUUUUUUUUUUU @order.next"
           state_callback(:after)
         else
+          puts "UUUUUUUUUUUU @order.next else"
           flash[:error] = t(:payment_processing_failed)
           @order.state = 'masterpass' if params[:state] == 'masterpass'
           respond_with(@order) do |format|
@@ -131,7 +138,8 @@ Spree::CheckoutController.class_eval do
           return
         end
       else
-
+        puts "UUUUUUUUUUUU  before @order.line_items.length"
+        puts "UUUUUUUUUUUU  before @order.line_items.length#{ @order.line_items.length}"
         if @order.line_items.length < 1
           render status: 402, json: {
             :message => 'StaleCart'
@@ -144,20 +152,26 @@ Spree::CheckoutController.class_eval do
           state_callback(:after)
           puts "UUUUUUUUUUUU after @order.next"
         else
+          puts "UUUUUUUUUUUU before render status: 402, json:"
           render status: 402, json: {
             :message => @order.errors.full_messages.first
           }
+          puts "UUUUUUUUUUUU after render status: 402, json:"
           return
         end
       end
+
       puts "UUUUUUUUUUUU after @credit_card_gateway #{@credit_card_gateway.type}"
       # with 'cart checkout' by paypal express we can return to fill address
       if @order.state == 'payment' && @order.has_checkout_step?('payment')
+        puts "UUUUUUUUUUUU @order.state0 #{@order.state}"
         state_callback(:before)
         if @order.next
+          puts "UUUUUUUUUUUU @order.next"
           state_callback(:after)
         else
           @order.errors.delete(:state)
+          puts "UUUUUUUUUUUU @order.errors.delete(:state)"
         end
       end
       puts "UUUUUUUUUUUU @order.state#{@order.state}"
