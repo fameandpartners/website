@@ -87,6 +87,7 @@ Spree::CheckoutController.class_eval do
 
       fire_event('spree.checkout.update')
       puts "UUUUUUUUUUUU  after fire_event"
+      puts "UUUUUUUUUUUU  before object_params.key?(:coupon_code)#{object_params}"
       if object_params.key?(:coupon_code)
         puts "UUUUUUUUUUUU  object_params.key"
         if object_params[:coupon_code].present? && apply_coupon_code
@@ -106,6 +107,7 @@ Spree::CheckoutController.class_eval do
 
         return
       end
+      puts "UUUUUUUUUUUU  after object_params.key?(:coupon_code)#{object_params.key?(:coupon_code)}"
 
       if @credit_card_gateway.type == "Spree::Gateway::Pin"
         puts "UUUUUUUUUUUU after @credit_card_gateway"
