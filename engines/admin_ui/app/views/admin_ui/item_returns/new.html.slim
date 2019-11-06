@@ -1,12 +1,92 @@
+javascript:
+    function show_sub() {
+        var line_item_number_obj = document.getElementById('forms_item_returns_manual_order_return_line_item_number');
+        var index = line_item_number_obj.selectedIndex;
+        var line_item_number_value = line_item_number_obj.options[index].value;
+        var customer_name_ = document.getElementById("forms_item_returns_manual_order_return_customer_name");
+        var contact_email_ = document.getElementById("forms_item_returns_manual_order_return_contact_email");
+        var product_name_ = document.getElementById("forms_item_returns_manual_order_return_product_name");
+        var product_style_number_ = document.getElementById("forms_item_returns_manual_order_return_product_style_number");
+        var xml_http;
+        var data, json_data, product_name_value, product_style_number_value, customer_name_value, contact_email_value;
+        if (window.XMLHttpRequest) {
+            xml_http = new XMLHttpRequest();
+        } else {
+            // IE6, IE5
+            xml_http = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xml_http.open("GET", "/admin/numbers/?number="+line_item_number_value, false);
+        xml_http.onreadystatechange = function () {
+            if (xml_http.readyState==4&&xml_http.status==200) {
+                if (line_item_number_value == '') {
+                    data = xml_http.responseText;
+                    json_data = JSON.parse(data);
+                    product_name_value = product_name_.value = '';
+                    product_style_number_value = product_style_number_.value = '';
+                    customer_name_value = customer_name_.value = '';
+                    contact_email_value = contact_email_.value = '';
+                } else {
+                    data = xml_http.responseText;
+                    json_data = JSON.parse(data);
+                    product_name_value = product_name_.value = json_data.product_name;
+                    product_style_number_value = product_style_number_.value = json_data.product_style_number;
+                    customer_name_value = customer_name_.value = json_data.customer_name;
+                    contact_email_value = contact_email_.value = json_data.customer_email;
+                }
+            }else{
+                alert("system error!")
+            }
+        };
+        xml_http.send();
+
+    }
+
 .ibox.float-e-margins
   .ibox-title
     h5 New Manual Order Return
+
+  - if @line_item_.present?
+    div class="line_item_record_div"
+      table.line_items class="line_item_record"
+        thead
+          tr class="line_item_record_thead"
+            th Line Item Number
+            th Variant Id
+            th Order Id
+            th Quantity
+            th Price
+            th Currency
+            th Customizations
+            th Curation Name
+            th Fabric Price
+        tbody
+          - @line_item_.each do |raw_item|
+            tr class="line_item_record_tbody"
+              td = raw_item.id
+              td = raw_item.variant_id
+              td = raw_item.order_id
+              td = raw_item.quantity
+              td = raw_item.price
+              td = raw_item.currency
+              td = raw_item.customizations
+              td = raw_item.curation_name
+              td = raw_item.fabric_price
+
   = simple_form_for @new_return_form, url: item_returns_path do |f|
     .ibox-content
       = f.input :manual_order_data, input_html: { onpaste: 'prefillPastedManualReturn(this, event)', placeholder: 'Paste entire row from SpecialOrders spreadsheet here' }
       .hr-line-dashed
-      = f.input :order_number
-      = f.input :line_item_number
+
+      = f.input :requested_at, input_html: { readonly: 'readonly' }
+
+      - if @line_item_.present?
+        = f.input :order_number, input_html: { readonly: 'readonly' }
+        = f.input :line_item_number, label: 'Line Item Number' do
+          = f.select :line_item_number, options_for_select(ReturnRequestItem::LINE_ITEM_SELECT_MAP), { include_blank: true}, onchange: 'show_sub()'
+      - else
+        = f.input :order_number
+        = f.input :line_item_number, label: 'Line Item Number'
+
       = f.input :requested_action,    collection: ReturnRequestItem::ACTIONS.map(&:titleize).zip(ReturnRequestItem::ACTIONS)
       = f.input :reason_category,     collection: ReturnRequestItem::REASON_CATEGORIES.sort
       = f.input :reason_sub_category, label: 'Reason' do
@@ -31,8 +111,6 @@
       = f.input :order_payment_date
       = f.input :order_payment_ref, label: 'Payment Reference #', input_html: { placeholder: 'e.g. Pin token or Paypal TXN ID' }
       = f.input :order_paid_currency, collection: -> {SiteVersion.pluck(:currency)}
-      = f.input :requested_at
-
       = f.input :comment, label: 'Additional Comments'
 
     .ibox-footer

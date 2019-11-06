@@ -299,6 +299,7 @@ FameAndPartners::Application.routes.draw do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabrications,       :only => :update
     resources :shipments,          :only => :update
+    get '/numbers', :to => "numbers#index"
   end
 
   # ----------
