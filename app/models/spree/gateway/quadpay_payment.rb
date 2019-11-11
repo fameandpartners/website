@@ -215,18 +215,9 @@ module Spree
       #Spree::Config.quad_pay_test_mode
 
       def quadpay_api
-        if ENV['QUADPAY_TEST_MODE']
-          ActiveMerchant::Billing::QuadPayApi.new(
-            ENV['CLIENT_ID'],
-            ENV['CLIENT_SECRET'],
-            ENV['QUADPAY_TEST_MODE'])
-        else
-          ActiveMerchant::Billing::QuadPayApi.new(
-            ENV['CLIENT_ID_PRODUCT'],
-            ENV['CLIENT_SECRET_PRODUCT'],
-            false)
-        end
-
+        ActiveMerchant::Billing::QuadPayApi.new(
+          ENV['QP_CLIENT_ID'],
+          ENV['QP_CLIENT_SECRET'])
       end
     end
   end
