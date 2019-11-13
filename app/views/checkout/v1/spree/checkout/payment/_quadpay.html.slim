@@ -2,16 +2,18 @@ ruby:
   order_price = spree_order.total
   order_total_text = Spree::Money.new(order_price, currency: 'USD').to_s
   single_installment_text = Spree::Money.new(order_price / 4, currency: 'USD').to_s
-  min_quadpay_price = 35
-  max_quadpay_price = 1500
-  min_quadpay_price_text = Spree::Money.new(35, currency: 'USD').to_s
-  max_quadpay_price_text = Spree::Money.new(1500, currency: 'USD').to_s
+  min_quadpay_price = Float(ENV['QUADPAY_MIN'])
+  max_quadpay_price = Float(ENV['QUADPAY_MAX'])
+  min_quadpay_price_text = Spree::Money.new(min_quadpay_price, currency: 'USD').to_s
+  max_quadpay_price_text = Spree::Money.new(max_quadpay_price, currency: 'USD').to_s
 
 h4
   -if order_price > max_quadpay_price
-    | 4 interest-free payments on up to #{max_quadpay_price_text} by Quadpay
+    | 4 interest-free payments on up to #{max_quadpay_price_text} by
+    =<> image_tag 'checkout/logo/quadpay-logo-black.svg'
   - if order_price < min_quadpay_price
-    | 4 interest-free payments on over #{min_quadpay_price_text} by Quadpay
+    | 4 interest-free payments on over #{min_quadpay_price_text} by
+    =<> image_tag 'checkout/logo/quadpay-logo-black.svg'
   - else
     | Four fortnightly interest free payments totalling #{order_total_text}
     .payments.hidden-xs.hidden-sm
