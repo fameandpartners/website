@@ -2,8 +2,8 @@ ruby:
   order_price = spree_order.total
   order_total_text = Spree::Money.new(order_price, currency: 'USD').to_s
   single_installment_text = Spree::Money.new(order_price / 4, currency: 'USD').to_s
-  min_quadpay_price = Float(ENV['QUADPAY_MIN'])
-  max_quadpay_price = Float(ENV['QUADPAY_MAX'])
+  min_quadpay_price = Float(ENV['QP_MIN'])
+  max_quadpay_price = Float(ENV['QP_MAX'])
   min_quadpay_price_text = Spree::Money.new(min_quadpay_price, currency: 'USD').to_s
   max_quadpay_price_text = Spree::Money.new(max_quadpay_price, currency: 'USD').to_s
 
