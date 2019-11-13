@@ -22,14 +22,18 @@ module Spree
           previous_qp_order_obj = previous_payment&.quadpay_order
           if previous_qp_order_obj
             quadpay_order_info = payment_method.find_order(previous_qp_order_obj.qp_order_id)
-            if quadpay_order_info && quadpay_order_info["orderStatus"] == "Approved"
+            puts "quadpay_order_info: " + quadpay_order_info["orderStatus"].to_s unless quadpay_order_info.nil?
+            if quadpay_order_info && quadpay_order_info["orderStatus"] === "Approved"
+              puts "already paid: " + quadpay_order_info["orderStatus"].to_s
               if Spree::QuadPayHelper::complete_order_and_payment(previous_payment, @order, !signed_in?)
+                puts "complete_order_and_payment for previous quadpay succeeded: " + previous_qp_order_obj.qp_order_id.to_s
                 flash[:commerce_tracking] = 'nothing special'
                 session[:successfully_ordered] = true
                 flash['order_completed'] = true
                 flash[:notice] = "The order has been paid successfully."
                 return redirect_to completion_route
               else
+                puts "complete_order_and_payment for previous quadpay failed: " + previous_qp_order_obj.qp_order_id.to_s
                 flash[:error] = "Quapay payment failed(4), order number: #{@order.number}"
                 return redirect_to checkout_state_path(@order.state)
               end

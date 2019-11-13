@@ -1,6 +1,7 @@
 Spree::CheckoutController.class_eval do
 
   before_filter :before_masterpass
+  before_filter :destroy_uncompleted_qd_payment
   skip_before_filter :check_registration
   #before_filter :confirm_quad_pay, only: [:update]
   before_filter def switch_views_version
@@ -360,6 +361,35 @@ Spree::CheckoutController.class_eval do
     end
   end
 
+  def destroy_uncompleted_qd_payment
+    load_order
+    if @order.nil?
+      return
+    end
+    previous_payment = @order.payments.find{|x| x.payment_method_id == Spree::Gateway::QuadpayPayment.payment_method.id }
+    if previous_payment && previous_payment.state != "completed"
+      previous_qp_order_obj = previous_payment.quadpay_order
+      if previous_qp_order_obj
+        quadpay_order_info = Spree::Gateway::QuadpayPayment.payment_method.find_order(previous_qp_order_obj.qp_order_id)
+        puts "quadpay_order_info1: " + quadpay_order_info["orderStatus"].to_s unless quadpay_order_info.nil?
+        if quadpay_order_info && quadpay_order_info["orderStatus"] === "Approved"
+          puts "already paid1: " + quadpay_order_info["orderStatus"].to_s
+          if Spree::QuadPayHelper::complete_order_and_payment(previous_payment, @order, !signed_in?)
+            puts "complete_order_and_payment for previous quadpay succeeded1: " + previous_qp_order_obj.qp_order_id.to_s
+          else
+            puts "complete_order_and_payment for previous quadpay failed1: " + previous_qp_order_obj.qp_order_id.to_s
+          end
+        end
+      end
+      if previous_payment.state != "completed"
+        if previous_qp_order_obj
+          previous_qp_order_obj.destroy
+        end
+        previous_payment.destroy
+      end
+    end
+  end
+
   def country_code_from_ip
     FindCountryFromIP.new(request.remote_ip).country_code
   end
@@ -410,12 +440,12 @@ Spree::CheckoutController.class_eval do
       method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
 
-    if user ||= spree_current_user
-        if user.admin?
+    # if user ||= spree_current_user
+    #     if user.admin?
           @quad_pay_method = @order.available_payment_methods.detect do |method|
             method.method_type == 'quadpay' && current_site_version.currency == method.currency
-          end
-        end
+          # end
+        # end
     end
   end
 
