@@ -22,14 +22,14 @@ module AdminUi
         f.html do
           @collection.scope do |scope|
             scope = scope.send(params[:scope]) if params[:scope]
-            scope.page(params[:page]).per(20)
+            scope.page(params[:page]).per(50)
           end
         end
         f.csv do
           send_data @collection.to_csv,
-                    type: "text/csv",
-                    disposition: 'inline',
-                    filename: "item_returns-#{DateTime.now.to_s(:file_timestamp)}.csv"
+            type: "text/csv",
+            disposition: 'inline',
+            filename: "item_returns-#{DateTime.now.to_s(:file_timestamp)}.csv"
         end
       end
     end
