@@ -132,6 +132,7 @@ module FameAndPartners
       Rails.configuration.spree.payment_methods << Spree::Gateway::NabTransactGateway
       Rails.configuration.spree.payment_methods << Spree::Gateway::AfterpayPayment
       Rails.configuration.spree.payment_methods << Spree::Gateway::FameStripe
+      Rails.configuration.spree.payment_methods << Spree::Gateway::ApplePayStripe
 
       Rails.application.config.spree.calculators.shipping_methods << Spree::Calculator::PriceSackShipping
       Rails.application.config.spree.calculators.shipping_methods << Spree::Calculator::SaleShipping

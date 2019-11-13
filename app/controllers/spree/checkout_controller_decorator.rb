@@ -407,6 +407,10 @@ Spree::CheckoutController.class_eval do
     @afterpay_method = @order.available_payment_methods.detect do |method|
       method.method_type == 'afterpay' && current_site_version.currency == method.currency
     end
+
+    @apple_pay_method = @order.available_payment_methods.detect do |method|
+      method.method_type == 'apple_pay_stripe' && current_site_version.currency == method.currency
+    end
   end
 
   helper_method :completion_route

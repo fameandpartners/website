@@ -283,6 +283,9 @@ FameAndPartners::Application.routes.draw do
 
   post 'shipments_update', to: 'shippo/shipments#update'
 
+  # apple pay verification
+  get '/.well-known/apple-developer-merchantid-domain-association' => 'spree/apple_pay_domain_verification#show'
+
   ################
   # User Campaigns
   ################
@@ -386,7 +389,7 @@ FameAndPartners::Application.routes.draw do
         resources :layer_cads
         resources :curations
 
-      
+
         resources :making_options, controller: 'product_making_options', except: [:destroy] do
           member do
             put :toggle

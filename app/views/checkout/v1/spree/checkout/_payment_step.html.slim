@@ -21,7 +21,7 @@ javascript:
     h2.checkout-section-title Payment method
     / TODO - Rewrite as react component with new button layout and behaviour
     p How would you like to pay?
-    
+
     ul.payment-option-grid.nav.nav-tabs.nav-justified.no-stack-mobile role="tablist"
       - if @credit_card_gateway
         li.payment-option.active
@@ -38,6 +38,11 @@ javascript:
           a data-toggle="tab" href="#paypal" aria-controls="paypal" role="tab"
             i.fa.fa-paypal
             | Paypal
+      - if @apple_pay_method
+        li.payment-option
+          a data-toggle="tab" href="#apple_pay" aria-controls="apple_pay" role="tab"
+            i.fa.fa-apple
+            | Apple Pay
 
 .row
   .col-xs-12
@@ -69,6 +74,11 @@ javascript:
           = link_to paypal_express_path(payment_method_id: @pay_pal_method.id), method: :post, id: 'paypal_button', alt: 'Paypal', class: 'js-returns-abc-paypal payment-cta btn btn-black btn-block btn-md' do
             | Pay with
             =<> image_tag('checkout/logo/paypal-logo-white.png')
+
+      - if @apple_pay_method
+        #apple_pay.text-center.payment-selected.tab-pane role="tabpanel"
+          p.hint Place your order and you will complete your purchase via the Apple Pay.
+          #payment-request-button
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the
