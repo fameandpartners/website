@@ -214,7 +214,7 @@ module Spree
       #Spree::Config.quad_pay_client_secret,
       #Spree::Config.quad_pay_test_mode
 
-      #涓嶅尯鍒嗘槸娴嬭瘯鐜杩樻槸鐢熶骇鐜
+      #不区分是测试环境还是生产环境
       def quadpay_api
           ActiveMerchant::Billing::QuadPayApi.new(
             ENV['QP_CLIENT_ID'],
