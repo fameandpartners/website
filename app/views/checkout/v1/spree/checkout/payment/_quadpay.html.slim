@@ -11,10 +11,16 @@ h4
 - if order_price > max_quadpay_price
   | 4 interest-free payments on up to #{max_quadpay_price_text} by
   =<> image_tag 'checkout/logo/quadpay-logo-black.svg'
+  a.btn.btn-disabled.btn-md.btn-block.open-quadpay-modal.payment-cta
+    | Pay with
+    =<> image_tag 'checkout/logo/quadpay-white-logo.svg'
   end
 - if order_price < min_quadpay_price
   | 4 interest-free payments on over #{min_quadpay_price_text} by
   =<> image_tag 'checkout/logo/quadpay-logo-black.svg'
+  a.btn.btn-disabled.btn-md.btn-block.open-quadpay-modal.payment-cta
+    | Pay with
+    =<> image_tag 'checkout/logo/quadpay-white-logo.svg'
   end
 - if order_price >= min_quadpay_price && order_price <= max_quadpay_price
   | Four fortnightly interest free payments totalling #{order_total_text}
