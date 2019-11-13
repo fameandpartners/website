@@ -16,7 +16,7 @@ h4
   | 4 interest-free payments on over #{min_quadpay_price_text} by
   =<> image_tag 'checkout/logo/quadpay-logo-black.svg'
   end
-- else
+- if order_price >= min_quadpay_price && order_price <= max_quadpay_price
   | Four fortnightly interest free payments totalling #{order_total_text}
   .payments.hidden-xs.hidden-sm
     .payment
