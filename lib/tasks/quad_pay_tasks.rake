@@ -72,7 +72,7 @@ namespace :quad_pay_tasks do
       where(:payment_method_id => method_id).
       joins(:order).
       where('spree_payments.state not IN (?)', %w(failed completed)).
-      where('spree_payments.created_at >= ?', 10.days.ago)
+      where('spree_payments.created_at >= ?', 15.minute.ago)
   end
 
   def complete_payment(payment, order)
