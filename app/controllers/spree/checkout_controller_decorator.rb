@@ -491,6 +491,7 @@ Spree::CheckoutController.class_eval do
       if user.admin?
         puts "find quadpay method order user admin"
         @quad_pay_method = @order.available_payment_methods.detect do |method|
+          puts "method type:" + method.method_type
           method.method_type == 'quadpay' && current_site_version.currency == method.currency
         end
       end
