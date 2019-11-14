@@ -116,8 +116,8 @@ when :development
   end
 
   configatron.elasticsearch.indices do |index|
-    index.spree_products = :spree_products_development
-    index.color_variants = :color_variants_development
+    #index.spree_products = :spree_products_development
+    #index.color_variants = :color_variants_development
   end
 when :staging
   configatron.site_version_detector_strategy = :top_level_domain
@@ -131,7 +131,7 @@ when :test
   configatron.site_version_detector_strategy = :subdomain
 
   configatron.elasticsearch.indices do |index|
-    index.spree_products = :spree_products_test
-    index.color_variants = :color_variants_test
+    #index.spree_products = :spree_products_test
+    #index.color_variants = :color_variants_test
   end
 end

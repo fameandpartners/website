@@ -94,7 +94,7 @@ module Feeds
 
       # @override
       def product_description(item)
-        CGI.escapeHTML(item[:description])
+          CGI.escapeHTML(item[:description])
       end
 
       def storage_credentials
