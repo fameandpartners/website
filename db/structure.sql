@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.1
--- Dumped by pg_dump version 11.2
+-- Dumped from database version 9.6.11
+-- Dumped by pg_dump version 9.6.15
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -12,12 +12,560 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
+
+--
+-- Name: analytics; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA analytics;
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: curations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.curations (
+    id integer NOT NULL,
+    name character varying(255),
+    pid character varying(255),
+    product_id integer,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    description text
+);
+
+
+--
+-- Name: fabrications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fabrications (
+    id integer NOT NULL,
+    line_item_id integer,
+    purchase_order_number character varying(255),
+    state character varying(255),
+    factory_name character varying(255),
+    sla_date date,
+    uuid character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: fabrics; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fabrics (
+    id integer NOT NULL,
+    name character varying(255),
+    presentation character varying(255),
+    old_price_aud character varying(255),
+    old_price_usd character varying(255),
+    material character varying(255),
+    image_url character varying(255),
+    option_value_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    option_fabric_color_value_id integer,
+    production_code character varying(255),
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    image_updated_at timestamp without time zone
+);
+
+
+--
+-- Name: factories; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.factories (
+    id integer NOT NULL,
+    name text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    production_email text
+);
+
+
+--
+-- Name: line_item_making_options; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.line_item_making_options (
+    id integer NOT NULL,
+    product_id integer,
+    old_variant_id integer,
+    line_item_id integer,
+    making_option_id integer,
+    flat_price numeric(10,2),
+    currency character varying(10),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    percent_price numeric(8,2)
+);
+
+
+--
+-- Name: line_item_personalizations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.line_item_personalizations (
+    id integer NOT NULL,
+    line_item_id integer,
+    product_id integer,
+    size character varying(255),
+    customization_value_ids character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    color character varying(255),
+    color_id integer,
+    price numeric(8,2) DEFAULT 0.0,
+    size_id integer,
+    height character varying(255) DEFAULT 'standard'::character varying,
+    height_value character varying(255),
+    height_unit character varying(255),
+    sku character varying(128)
+);
+
+
+--
+-- Name: making_options; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.making_options (
+    id integer NOT NULL,
+    code character varying(255),
+    name character varying(255),
+    description character varying(255),
+    delivery_period character varying(255),
+    cny_delivery_period character varying(255),
+    making_time_business_days integer,
+    cny_making_time_business_days integer,
+    flat_price_usd numeric(8,2),
+    flat_price_aud numeric(8,2),
+    percent_price_usd numeric(8,2),
+    percent_price_aud numeric(8,2),
+    "position" integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    delivery_time_days integer,
+    cny_delivery_time_days integer,
+    cny_start_date timestamp without time zone,
+    cny_end_date timestamp without time zone
+);
+
+
+--
+-- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.return_request_items (
+    id integer NOT NULL,
+    order_return_request_id integer,
+    line_item_id integer,
+    quantity integer,
+    action text,
+    reason_category text,
+    reason text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: spree_line_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_line_items (
+    id integer NOT NULL,
+    variant_id integer,
+    order_id integer,
+    quantity integer NOT NULL,
+    price numeric(8,2) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    currency character varying(255),
+    old_price numeric(8,2),
+    delivery_date character varying(255),
+    customizations jsonb,
+    stock boolean,
+    color character varying(255),
+    size character varying(255),
+    length character varying(255),
+    upc character varying(255),
+    fabric_id integer,
+    return_inventory_item_id integer,
+    refulfill_status character varying(255),
+    curation_name text,
+    fabric_price numeric(8,2)
+);
+
+
+--
+-- Name: spree_option_values; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_option_values (
+    id integer NOT NULL,
+    "position" integer,
+    name character varying(255),
+    presentation character varying(255),
+    option_type_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    value character varying(255),
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    use_in_customisation boolean DEFAULT false
+);
+
+
+--
+-- Name: spree_orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_orders (
+    id integer NOT NULL,
+    number character varying(15),
+    item_total numeric(10,2) DEFAULT 0.0 NOT NULL,
+    total numeric(10,2) DEFAULT 0.0 NOT NULL,
+    state character varying(255),
+    adjustment_total numeric(10,2) DEFAULT 0.0 NOT NULL,
+    user_id integer,
+    completed_at timestamp without time zone,
+    bill_address_id integer,
+    ship_address_id integer,
+    payment_total numeric(10,2) DEFAULT 0.0,
+    shipping_method_id integer,
+    shipment_state character varying(255),
+    payment_state character varying(255),
+    email character varying(255),
+    special_instructions text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    currency character varying(255),
+    last_ip_address character varying(255),
+    user_first_name character varying(255),
+    user_last_name character varying(255),
+    required_to date,
+    customer_notes text,
+    projected_delivery_date timestamp without time zone,
+    site_version text,
+    orderbot_synced boolean,
+    return_type character varying(255),
+    vwo_type character varying(255),
+    autorefundable boolean
+);
+
+
+--
+-- Name: spree_products; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_products (
+    id integer NOT NULL,
+    name character varying(255) DEFAULT ''::character varying NOT NULL,
+    description text,
+    available_on timestamp without time zone,
+    deleted_at timestamp without time zone,
+    permalink character varying(255),
+    meta_description text,
+    meta_keywords character varying(255),
+    tax_category_id integer,
+    shipping_category_id integer,
+    count_on_hand integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    on_demand boolean DEFAULT false,
+    featured boolean DEFAULT false,
+    "position" integer DEFAULT 0,
+    hidden boolean DEFAULT false,
+    factory_id integer,
+    size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
+    fabric_card_id integer,
+    category_id integer,
+    old_customizations jsonb,
+    lengths jsonb
+);
+
+
+--
+-- Name: spree_variants; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_variants (
+    id integer NOT NULL,
+    sku character varying(255) DEFAULT ''::character varying NOT NULL,
+    weight numeric(8,2),
+    height numeric(8,2),
+    width numeric(8,2),
+    depth numeric(8,2),
+    deleted_at timestamp without time zone,
+    is_master boolean DEFAULT false,
+    product_id integer,
+    count_on_hand integer DEFAULT 0,
+    cost_price numeric(8,2),
+    "position" integer,
+    lock_version integer DEFAULT 0,
+    on_demand boolean DEFAULT false,
+    cost_currency character varying(255)
+);
+
+
+--
+-- Name: line_items_summary; Type: VIEW; Schema: analytics; Owner: -
+--
+
+CREATE VIEW analytics.line_items_summary AS
+ SELECT lip.id,
+    sv.sku,
+    sp.name AS product_name,
+    so.number AS order_number,
+    dcol.presentation AS colour,
+    so.email AS email_address,
+    sli.price,
+        CASE
+            WHEN (f.presentation IS NULL) THEN f2.presentation
+            ELSE f.presentation
+        END AS fabric,
+    dsize.name AS dresssize,
+    lip.height AS height_category,
+    sli.customizations,
+    fac.name AS factory,
+    (so.completed_at)::date AS order_completed,
+    mo.name AS making_option,
+    cu.pid,
+    (rri.id IS NOT NULL) AS is_returned
+   FROM ((((((((((((((public.spree_orders so
+     JOIN public.spree_line_items sli ON ((so.id = sli.order_id)))
+     LEFT JOIN public.fabrications ff ON ((sli.id = ff.line_item_id)))
+     LEFT JOIN public.fabrics f2 ON ((ff.id = f2.id)))
+     LEFT JOIN public.fabrics f ON ((sli.fabric_id = f.id)))
+     LEFT JOIN public.line_item_personalizations lip ON ((sli.id = lip.line_item_id)))
+     LEFT JOIN ( SELECT spree_option_values.id,
+            spree_option_values."position",
+            spree_option_values.name,
+            spree_option_values.presentation,
+            spree_option_values.option_type_id,
+            spree_option_values.created_at,
+            spree_option_values.updated_at,
+            spree_option_values.value,
+            spree_option_values.image_file_name,
+            spree_option_values.image_content_type,
+            spree_option_values.image_file_size,
+            spree_option_values.use_in_customisation
+           FROM public.spree_option_values
+          WHERE (spree_option_values.option_type_id = 8)) dcol ON ((lip.color_id = dcol.id)))
+     LEFT JOIN ( SELECT spree_option_values.id,
+            spree_option_values."position",
+            spree_option_values.name,
+            spree_option_values.presentation,
+            spree_option_values.option_type_id,
+            spree_option_values.created_at,
+            spree_option_values.updated_at,
+            spree_option_values.value,
+            spree_option_values.image_file_name,
+            spree_option_values.image_content_type,
+            spree_option_values.image_file_size,
+            spree_option_values.use_in_customisation
+           FROM public.spree_option_values
+          WHERE (spree_option_values.option_type_id = 7)) dsize ON ((lip.size_id = dsize.id)))
+     LEFT JOIN public.line_item_making_options limo ON ((sli.id = limo.line_item_id)))
+     LEFT JOIN public.making_options mo ON ((limo.making_option_id = mo.id)))
+     LEFT JOIN public.spree_variants sv ON ((sli.variant_id = sv.id)))
+     LEFT JOIN public.spree_products sp ON ((sv.product_id = sp.id)))
+     LEFT JOIN public.factories fac ON ((sp.factory_id = fac.id)))
+     LEFT JOIN public.curations cu ON ((sp.id = cu.product_id)))
+     LEFT JOIN public.return_request_items rri ON (((sli.id = rri.line_item_id) AND (rri.action <> 'keep'::text))))
+  WHERE (so.completed_at IS NOT NULL);
+
+
+--
+-- Name: line_item_updates; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.line_item_updates (
+    id integer NOT NULL,
+    row_number integer,
+    order_date text,
+    order_number text,
+    style_name text,
+    size text,
+    quantity text,
+    colour text,
+    tracking_number text,
+    dispatch_date text,
+    delivery_method text,
+    bulk_order_update_id integer,
+    order_id integer,
+    line_item_id integer,
+    shipment_id integer,
+    state text,
+    process_reason text,
+    match_errors text,
+    shipment_errors text,
+    processed_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    make_state character varying(255),
+    raw_line_item character varying(255),
+    setup_ship_errors text
+);
+
+
+--
+-- Name: spree_shipments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_shipments (
+    id integer NOT NULL,
+    tracking character varying(255),
+    number character varying(255),
+    cost numeric(8,2),
+    shipped_at timestamp without time zone,
+    order_id integer,
+    shipping_method_id integer,
+    address_id integer,
+    state character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: line_items_summary2; Type: VIEW; Schema: analytics; Owner: -
+--
+
+CREATE VIEW analytics.line_items_summary2 AS
+ SELECT sli.id,
+    sv.sku,
+    sp.name AS product_name,
+    so.number AS order_number,
+    dcol.presentation AS colour,
+    so.email AS email_address,
+    (sli.price + (so.adjustment_total / (count(*) OVER (PARTITION BY so.id))::numeric)) AS price,
+    (so.adjustment_total / (count(*) OVER (PARTITION BY so.id))::numeric) AS discount,
+        CASE
+            WHEN (f.presentation IS NULL) THEN f2.presentation
+            ELSE f.presentation
+        END AS fabric,
+    dsize.name AS dresssize,
+    lip.height AS height_category,
+    sli.customizations,
+    fac.name AS factory,
+    (so.completed_at)::date AS order_completed,
+    mo.name AS making_option,
+        CASE
+            WHEN (rri.id IS NOT NULL) THEN 'returned'::text
+            WHEN ((so.completed_at + '84 days'::interval) < now()) THEN 'completed'::text
+            WHEN (EXISTS ( SELECT line_item_updates.id,
+                line_item_updates.row_number,
+                line_item_updates.order_date,
+                line_item_updates.order_number,
+                line_item_updates.style_name,
+                line_item_updates.size,
+                line_item_updates.quantity,
+                line_item_updates.colour,
+                line_item_updates.tracking_number,
+                line_item_updates.dispatch_date,
+                line_item_updates.delivery_method,
+                line_item_updates.bulk_order_update_id,
+                line_item_updates.order_id,
+                line_item_updates.line_item_id,
+                line_item_updates.shipment_id,
+                line_item_updates.state,
+                line_item_updates.process_reason,
+                line_item_updates.match_errors,
+                line_item_updates.shipment_errors,
+                line_item_updates.processed_at,
+                line_item_updates.created_at,
+                line_item_updates.updated_at,
+                line_item_updates.make_state,
+                line_item_updates.raw_line_item,
+                line_item_updates.setup_ship_errors,
+                spree_shipments.id,
+                spree_shipments.tracking,
+                spree_shipments.number,
+                spree_shipments.cost,
+                spree_shipments.shipped_at,
+                spree_shipments.order_id,
+                spree_shipments.shipping_method_id,
+                spree_shipments.address_id,
+                spree_shipments.state,
+                spree_shipments.created_at,
+                spree_shipments.updated_at
+               FROM (public.line_item_updates
+                 LEFT JOIN public.spree_shipments ON ((line_item_updates.shipment_id = spree_shipments.id)))
+              WHERE ((line_item_updates.line_item_id = sli.id) AND (spree_shipments.shipped_at IS NOT NULL)))) THEN 'shipped'::text
+            ELSE 'making'::text
+        END AS status
+   FROM (((((((((((((public.spree_orders so
+     JOIN public.spree_line_items sli ON ((so.id = sli.order_id)))
+     LEFT JOIN public.fabrications ff ON ((sli.id = ff.line_item_id)))
+     LEFT JOIN public.fabrics f2 ON ((ff.id = f2.id)))
+     LEFT JOIN public.fabrics f ON ((sli.fabric_id = f.id)))
+     LEFT JOIN public.line_item_personalizations lip ON ((sli.id = lip.line_item_id)))
+     LEFT JOIN ( SELECT spree_option_values.id,
+            spree_option_values."position",
+            spree_option_values.name,
+            spree_option_values.presentation,
+            spree_option_values.option_type_id,
+            spree_option_values.created_at,
+            spree_option_values.updated_at,
+            spree_option_values.value,
+            spree_option_values.image_file_name,
+            spree_option_values.image_content_type,
+            spree_option_values.image_file_size,
+            spree_option_values.use_in_customisation
+           FROM public.spree_option_values
+          WHERE (spree_option_values.option_type_id = 8)) dcol ON ((lip.color_id = dcol.id)))
+     LEFT JOIN ( SELECT spree_option_values.id,
+            spree_option_values."position",
+            spree_option_values.name,
+            spree_option_values.presentation,
+            spree_option_values.option_type_id,
+            spree_option_values.created_at,
+            spree_option_values.updated_at,
+            spree_option_values.value,
+            spree_option_values.image_file_name,
+            spree_option_values.image_content_type,
+            spree_option_values.image_file_size,
+            spree_option_values.use_in_customisation
+           FROM public.spree_option_values
+          WHERE (spree_option_values.option_type_id = 7)) dsize ON ((lip.size_id = dsize.id)))
+     LEFT JOIN public.line_item_making_options limo ON ((sli.id = limo.line_item_id)))
+     LEFT JOIN public.making_options mo ON ((limo.making_option_id = mo.id)))
+     LEFT JOIN public.spree_variants sv ON ((sli.variant_id = sv.id)))
+     LEFT JOIN public.spree_products sp ON ((sv.product_id = sp.id)))
+     LEFT JOIN public.factories fac ON ((sp.factory_id = fac.id)))
+     LEFT JOIN public.return_request_items rri ON (((sli.id = rri.line_item_id) AND (rri.action <> 'keep'::text))))
+  WHERE (so.completed_at IS NOT NULL);
+
 
 --
 -- Name: activities; Type: TABLE; Schema: public; Owner: -
@@ -503,27 +1051,10 @@ ALTER SEQUENCE public.contentful_versions_id_seq OWNED BY public.contentful_vers
 
 
 --
--- Name: curations; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.curations (
-    id integer NOT NULL,
-    name character varying(255),
-    pid character varying(255),
-    product_id integer,
-    active boolean,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    description text
-);
-
-
---
 -- Name: curations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.curations_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -645,7 +1176,6 @@ CREATE TABLE public.customisation_groups (
 --
 
 CREATE SEQUENCE public.customisation_groups_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -794,26 +1324,6 @@ CREATE TABLE public.spree_option_types (
     "position" integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: spree_option_values; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_option_values (
-    id integer NOT NULL,
-    "position" integer,
-    name character varying(255),
-    presentation character varying(255),
-    option_type_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    value character varying(255),
-    image_file_name character varying(255),
-    image_content_type character varying(255),
-    image_file_size integer,
-    use_in_customisation boolean DEFAULT false
 );
 
 
@@ -1005,23 +1515,6 @@ ALTER SEQUENCE public.fabrication_events_id_seq OWNED BY public.fabrication_even
 
 
 --
--- Name: fabrications; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.fabrications (
-    id integer NOT NULL,
-    line_item_id integer,
-    purchase_order_number character varying(255),
-    state character varying(255),
-    factory_name character varying(255),
-    sla_date date,
-    uuid character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
 -- Name: fabrications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1038,30 +1531,6 @@ CREATE SEQUENCE public.fabrications_id_seq
 --
 
 ALTER SEQUENCE public.fabrications_id_seq OWNED BY public.fabrications.id;
-
-
---
--- Name: fabrics; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.fabrics (
-    id integer NOT NULL,
-    name character varying(255),
-    presentation character varying(255),
-    old_price_aud character varying(255),
-    old_price_usd character varying(255),
-    material character varying(255),
-    image_url character varying(255),
-    option_value_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    option_fabric_color_value_id integer,
-    production_code character varying(255),
-    image_file_name character varying(255),
-    image_content_type character varying(255),
-    image_file_size integer,
-    image_updated_at timestamp without time zone
-);
 
 
 --
@@ -1401,19 +1870,6 @@ ALTER SEQUENCE public.facebook_data_id_seq OWNED BY public.facebook_data.id;
 
 
 --
--- Name: factories; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.factories (
-    id integer NOT NULL,
-    name text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    production_email text
-);
-
-
---
 -- Name: factories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1734,24 +2190,6 @@ ALTER SEQUENCE public.layer_cads_id_seq OWNED BY public.layer_cads.id;
 
 
 --
--- Name: line_item_making_options; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.line_item_making_options (
-    id integer NOT NULL,
-    product_id integer,
-    old_variant_id integer,
-    line_item_id integer,
-    making_option_id integer,
-    flat_price numeric(10,2),
-    currency character varying(10),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    percent_price numeric(8,2)
-);
-
-
---
 -- Name: line_item_making_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1768,29 +2206,6 @@ CREATE SEQUENCE public.line_item_making_options_id_seq
 --
 
 ALTER SEQUENCE public.line_item_making_options_id_seq OWNED BY public.line_item_making_options.id;
-
-
---
--- Name: line_item_personalizations; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.line_item_personalizations (
-    id integer NOT NULL,
-    line_item_id integer,
-    product_id integer,
-    size character varying(255),
-    customization_value_ids character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    color character varying(255),
-    color_id integer,
-    price numeric(8,2) DEFAULT 0.0,
-    size_id integer,
-    height character varying(255) DEFAULT 'standard'::character varying,
-    height_value character varying(255),
-    height_unit character varying(255),
-    sku character varying(128)
-);
 
 
 --
@@ -1858,39 +2273,6 @@ ALTER SEQUENCE public.line_item_size_normalisations_id_seq OWNED BY public.line_
 
 
 --
--- Name: line_item_updates; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.line_item_updates (
-    id integer NOT NULL,
-    row_number integer,
-    order_date text,
-    order_number text,
-    style_name text,
-    size text,
-    quantity text,
-    colour text,
-    tracking_number text,
-    dispatch_date text,
-    delivery_method text,
-    bulk_order_update_id integer,
-    order_id integer,
-    line_item_id integer,
-    shipment_id integer,
-    state text,
-    process_reason text,
-    match_errors text,
-    shipment_errors text,
-    processed_at timestamp without time zone,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    make_state character varying(255),
-    raw_line_item character varying(255),
-    setup_ship_errors text
-);
-
-
---
 -- Name: line_item_updates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1910,38 +2292,10 @@ ALTER SEQUENCE public.line_item_updates_id_seq OWNED BY public.line_item_updates
 
 
 --
--- Name: making_options; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.making_options (
-    id integer NOT NULL,
-    code character varying(255),
-    name character varying(255),
-    description character varying(255),
-    delivery_period character varying(255),
-    cny_delivery_period character varying(255),
-    making_time_business_days integer,
-    cny_making_time_business_days integer,
-    flat_price_usd numeric(8,2),
-    flat_price_aud numeric(8,2),
-    percent_price_usd numeric(8,2),
-    percent_price_aud numeric(8,2),
-    "position" integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    delivery_time_days integer,
-    cny_delivery_time_days integer,
-    cny_start_date timestamp without time zone,
-    cny_end_date timestamp without time zone
-);
-
-
---
 -- Name: making_options_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.making_options_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3053,23 +3407,6 @@ ALTER SEQUENCE public.return_inventory_items_id_seq OWNED BY public.return_inven
 
 
 --
--- Name: return_request_items; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.return_request_items (
-    id integer NOT NULL,
-    order_return_request_id integer,
-    line_item_id integer,
-    quantity integer,
-    action text,
-    reason_category text,
-    reason text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
 -- Name: return_request_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3744,35 +4081,6 @@ ALTER SEQUENCE public.spree_inventory_units_id_seq OWNED BY public.spree_invento
 
 
 --
--- Name: spree_line_items; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_line_items (
-    id integer NOT NULL,
-    variant_id integer,
-    order_id integer,
-    quantity integer NOT NULL,
-    price numeric(8,2) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    currency character varying(255),
-    old_price numeric(8,2),
-    delivery_date character varying(255),
-    customizations jsonb,
-    stock boolean,
-    color character varying(255),
-    size character varying(255),
-    length character varying(255),
-    upc character varying(255),
-    fabric_id integer,
-    return_inventory_item_id integer,
-    refulfill_status character varying(255),
-    curation_name text,
-    fabric_price numeric(8,2)
-);
-
-
---
 -- Name: spree_line_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3990,44 +4298,6 @@ ALTER SEQUENCE public.spree_option_values_id_seq OWNED BY public.spree_option_va
 CREATE TABLE public.spree_option_values_variants (
     variant_id integer,
     option_value_id integer
-);
-
-
---
--- Name: spree_orders; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_orders (
-    id integer NOT NULL,
-    number character varying(15),
-    item_total numeric(10,2) DEFAULT 0.0 NOT NULL,
-    total numeric(10,2) DEFAULT 0.0 NOT NULL,
-    state character varying(255),
-    adjustment_total numeric(10,2) DEFAULT 0.0 NOT NULL,
-    user_id integer,
-    completed_at timestamp without time zone,
-    bill_address_id integer,
-    ship_address_id integer,
-    payment_total numeric(10,2) DEFAULT 0.0,
-    shipping_method_id integer,
-    shipment_state character varying(255),
-    payment_state character varying(255),
-    email character varying(255),
-    special_instructions text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    currency character varying(255),
-    last_ip_address character varying(255),
-    user_first_name character varying(255),
-    user_last_name character varying(255),
-    required_to date,
-    customer_notes text,
-    projected_delivery_date timestamp without time zone,
-    site_version text,
-    orderbot_synced boolean,
-    return_type character varying(255),
-    vwo_type character varying(255),
-    autorefundable boolean
 );
 
 
@@ -4358,37 +4628,6 @@ ALTER SEQUENCE public.spree_product_related_outerwear_id_seq OWNED BY public.spr
 
 
 --
--- Name: spree_products; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_products (
-    id integer NOT NULL,
-    name character varying(255) DEFAULT ''::character varying NOT NULL,
-    description text,
-    available_on timestamp without time zone,
-    deleted_at timestamp without time zone,
-    permalink character varying(255),
-    meta_description text,
-    meta_keywords character varying(255),
-    tax_category_id integer,
-    shipping_category_id integer,
-    count_on_hand integer DEFAULT 0,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    on_demand boolean DEFAULT false,
-    featured boolean DEFAULT false,
-    "position" integer DEFAULT 0,
-    hidden boolean DEFAULT false,
-    factory_id integer,
-    size_chart character varying(255) DEFAULT '2014'::character varying NOT NULL,
-    fabric_card_id integer,
-    category_id integer,
-    old_customizations jsonb,
-    lengths jsonb
-);
-
-
---
 -- Name: spree_products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4627,6 +4866,37 @@ ALTER SEQUENCE public.spree_prototypes_id_seq OWNED BY public.spree_prototypes.i
 
 
 --
+-- Name: spree_quadpay_orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.spree_quadpay_orders (
+    id integer NOT NULL,
+    payment_id integer,
+    qp_order_id character varying(255),
+    qp_order_token character varying(255)
+);
+
+
+--
+-- Name: spree_quadpay_orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.spree_quadpay_orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: spree_quadpay_orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.spree_quadpay_orders_id_seq OWNED BY public.spree_quadpay_orders.id;
+
+
+--
 -- Name: spree_return_authorizations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4736,25 +5006,6 @@ CREATE SEQUENCE public.spree_sales_id_seq
 --
 
 ALTER SEQUENCE public.spree_sales_id_seq OWNED BY public.spree_sales.id;
-
-
---
--- Name: spree_shipments; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_shipments (
-    id integer NOT NULL,
-    tracking character varying(255),
-    number character varying(255),
-    cost numeric(8,2),
-    shipped_at timestamp without time zone,
-    order_id integer,
-    shipping_method_id integer,
-    address_id integer,
-    state character varying(255),
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
 
 
 --
@@ -5308,29 +5559,6 @@ CREATE SEQUENCE public.spree_users_id_seq
 --
 
 ALTER SEQUENCE public.spree_users_id_seq OWNED BY public.spree_users.id;
-
-
---
--- Name: spree_variants; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.spree_variants (
-    id integer NOT NULL,
-    sku character varying(255) DEFAULT ''::character varying NOT NULL,
-    weight numeric(8,2),
-    height numeric(8,2),
-    width numeric(8,2),
-    depth numeric(8,2),
-    deleted_at timestamp without time zone,
-    is_master boolean DEFAULT false,
-    product_id integer,
-    count_on_hand integer DEFAULT 0,
-    cost_price numeric(8,2),
-    "position" integer,
-    lock_version integer DEFAULT 0,
-    on_demand boolean DEFAULT false,
-    cost_currency character varying(255)
-);
 
 
 --
@@ -6722,6 +6950,13 @@ ALTER TABLE ONLY public.spree_prototypes ALTER COLUMN id SET DEFAULT nextval('pu
 
 
 --
+-- Name: spree_quadpay_orders id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.spree_quadpay_orders ALTER COLUMN id SET DEFAULT nextval('public.spree_quadpay_orders_id_seq'::regclass);
+
+
+--
 -- Name: spree_return_authorizations id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -7909,6 +8144,14 @@ ALTER TABLE ONLY public.spree_properties
 
 ALTER TABLE ONLY public.spree_prototypes
     ADD CONSTRAINT spree_prototypes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: spree_quadpay_orders spree_quadpay_orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.spree_quadpay_orders
+    ADD CONSTRAINT spree_quadpay_orders_pkey PRIMARY KEY (id);
 
 
 --
@@ -10577,3 +10820,5 @@ INSERT INTO schema_migrations (version) VALUES ('20190110025723');
 INSERT INTO schema_migrations (version) VALUES ('20190313031251');
 
 INSERT INTO schema_migrations (version) VALUES ('20190318001535');
+
+INSERT INTO schema_migrations (version) VALUES ('20191010105118');

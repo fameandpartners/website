@@ -451,6 +451,9 @@ module Api
           paymentMethods: {
             afterPay: current_site_version.is_australia?
           },
+          siteVersionInfo:{
+            localisationCode: current_site_version.code
+          },
           size: {
             minHeightCm: MIN_CM,
             maxHeightCm: MAX_CM,

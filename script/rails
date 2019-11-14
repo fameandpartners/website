@@ -5,10 +5,32 @@ APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
 
 # Use Puma as Rails 3 default server. This can be removed after Rails 4 upgrade.
+def os
+	os ||= (
+	host_os = RbConfig::CONFIG['host_os']
+	case host_os
+	when /mswin|msys|mingw|cygwin|bccwin|wince|emc/
+		:windows
+	when /darwin|mac os/
+		:macosx
+	when /linux/
+		:linux
+	when /solaris|bsd/
+		:unix
+	else
+		raise Error::WebDriverError, "unknown os: #{host_os.inspect}"
+	end
+	)
+	os
+end
 
 if ENV.fetch('RAILS_ENV', 'development') == 'development'
   require 'rack/handler'
-  Rack::Handler::WEBrick = Rack::Handler.get(:unicorn)
+  if os == :windows
+	Rack::Handler::WEBrick = Rack::Handler.get(:puma)
+  else
+	Rack::Handler::WEBrick = Rack::Handler.get(:unicorn)
+  end
 end
 
 require 'rails/commands'
