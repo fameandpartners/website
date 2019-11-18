@@ -47,6 +47,9 @@ module ActiveMerchant
       end
 
       def send_request_post( path = '', body = {})
+        if  body.nil?
+          return  nil
+        end
         access_token
         base_url_str = "#{base_url}/#{path}"
         #uri = URI.parse("#{base_url}/#{path}")
