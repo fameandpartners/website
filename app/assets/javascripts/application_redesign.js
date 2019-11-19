@@ -65,7 +65,6 @@
 //= require partials/checkout_page
 //= require partials/checkout_page__stripe
 //= require partials/extra_fees_alert
-//= require partials/checkout_page_apple_pay
 
 jQuery(document).ready(function($){
   $('body').addClass('ready');

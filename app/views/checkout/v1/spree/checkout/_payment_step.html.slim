@@ -77,9 +77,12 @@ javascript:
 
       - if @apple_pay_method
         #apple_pay.text-center.payment-selected.tab-pane role="tabpanel"
+          = hidden_field_tag "ApplePayPaymentMethodID", @apple_pay_method.id
           p.hint Place your order and you will complete your purchase via the Apple Pay.
-          #payment-request-button
+          #payment-request-button.btn.btn-black.btn-block Apple Pay
 
     p.terms-note.text-center
         ' By making this purchase you are agreeing to the
         = link_to 'Term & Conditions.', '/terms', class: "link-underline-lighter"
+
+= javascript_include_tag 'partials/checkout_page_apple_pay.js'
