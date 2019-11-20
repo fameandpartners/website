@@ -12,3 +12,40 @@
     overflow-y:scroll;
     overflow-x:auto;
 }
+
+.line_item_record_div {
+  margin: 0 auto;
+  border-bottom:none;
+  background-color: #ffffff;
+}
+
+.line_item_record
+{
+  border-collapse: collapse;
+  margin: 20px auto;
+  text-align: center;
+  /*white-space: nowrap;*/
+}
+.line_item_record td, .line_item_record th
+{
+  border: 1px solid #cad9ea;
+  color: #666;
+  height: 30px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.line_item_record thead th
+{
+  background-color: #CCE8EB;
+  width: 100px;
+  text-align: center;
+}
+.line_item_record tr:nth-child(odd)
+{
+  background: #fff;
+}
+.line_item_record tr:nth-child(even)
+{
+  background: #F5FAFA;
+}
