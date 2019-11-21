@@ -24,6 +24,7 @@
   border-collapse: collapse;
   margin: 20px auto;
   text-align: center;
+  float: left;
   /*white-space: nowrap;*/
 }
 .line_item_record td, .line_item_record th
