@@ -136,6 +136,9 @@ module Spree
       end
 
       def build_order_params(order, confirm_url, cancel_url, notify_url)
+        if  order.billing_address.nil?
+          return  nil
+        end
         billing_address = order.billing_address
         shipping_address = order.shipping_address
         puts "ttttttttttttttttttt   tax_total"
@@ -214,7 +217,7 @@ module Spree
       #Spree::Config.quad_pay_client_secret,
       #Spree::Config.quad_pay_test_mode
 
-      #²»Çø·ÖÊÇ²âÊÔ»·¾³»¹ÊÇÉú²ú»·¾³
+      #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       def quadpay_api
           ActiveMerchant::Billing::QuadPayApi.new(
             ENV['QP_CLIENT_ID'],
