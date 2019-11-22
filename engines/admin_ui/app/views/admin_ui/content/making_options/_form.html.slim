@@ -1,0 +1,36 @@
+= form_for(@form, url: url) do |f|
+  .form-group
+    = f.label :code
+    = f.text_field :code, class: 'form-control'
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: 'form-control'
+  .form-group
+    = f.label :delivery_period
+    = f.text_field :delivery_period, class: 'form-control'
+  .form-group
+    = f.label :making_time_business_days
+    = f.text_field :making_time_business_days, class: 'form-control', type: :number
+  .form-group
+    = f.label :flat_price_usd
+    = f.text_field :flat_price_usd, class: 'form-control', type: :number, step: 'any'
+  .form-group
+    = f.label :flat_price_aud
+    = f.text_field :flat_price_aud, class: 'form-control', type: :number, step: 'any'
+  .form-group
+    = f.label :percent_price_usd
+    = f.text_field :percent_price_usd, class: 'form-control', type: :number, step: 'any'
+  .form-group
+    = f.label :percent_price_aud
+    = f.text_field :percent_price_aud, class: 'form-control', type: :number, step: 'any'
+  .form-group
+    = f.label :position
+    = f.text_field :position, class: 'form-control', type: :number
+  .form-group
+    = f.label :delivery_time_days
+    = f.text_field :delivery_time_days, class: 'form-control', type: :number
+  .form-group
+    = f.submit submit_text, class: 'btn btn-primary'
