@@ -7,43 +7,26 @@ module ActiveMerchant
     class QuadPayApi
       attr_accessor :client_id, :client_secret, :test_mode
 
-      def initialize(client_id, client_secret, test_mode)
+      def initialize(client_id, client_secret)
         @client_id = client_id
         @client_secret = client_secret
-        @test_mode = test_mode
+
       end
 
       def auth_end_point
         @auth_end_point ||=
-          if @test_mode
-            # 'https://quadpay-dev.auth0.com/oauth/token'
-            ENV['QUADPAY_TOKEN_URL']
-          else
-            #'https://quadpay.auth0.com/oauth/token'
-            ENV['QUADPAY_TOKEN_URL_PRODUCT']
-          end
+            ENV['QP_TOKEN_URL']
       end
 
       def auth_audience
         @auth_audience ||=
-          if @test_mode
             # 'https://auth-dev.quadpay.com'
-            ENV['QUADPAY_AUDIENCE_URL']
-          else
-            #'https://auth.quadpay.com'
-            ENV['QUADPAY_AUDIENCE_URL_PRODUCT']
-          end
+            ENV['QP_AUDIENCE_URL']
       end
 
       def base_url
         @base_url ||=
-          if @test_mode
-            # 'https://api-ut.quadpay.com'
-            ENV['QUADPAY_API_URL']
-          else
-            #'https://api.quadpay.com'
-            ENV['QUADPAY_API_URL_PRODUCT']
-          end
+            ENV['QP_API_URL']
       end
 
       def send_request_get(path = '', body = {})
@@ -64,6 +47,9 @@ module ActiveMerchant
       end
 
       def send_request_post( path = '', body = {})
+        if  body.nil?
+          return  nil
+        end
         access_token
         base_url_str = "#{base_url}/#{path}"
         #uri = URI.parse("#{base_url}/#{path}")

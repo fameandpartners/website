@@ -9,6 +9,9 @@ module Api
         if params[:order_number].blank?
 
           orders = current_spree_user.orders
+          if orders.nil?
+            return  nil
+          end
           puts "current_spree_user.orders"
           orders = orders.to_a
           puts orders.length
@@ -22,13 +25,14 @@ module Api
           orders.each do |od|
             puts od.to_s
           end
-          orders = current_spree_user.orders.hydrated.complete
+          orders = current_spree_user.orders.hydrated.complete.valid_orders
           puts "current_spree_user.orders.hydrated.complete"
           orders = orders.to_a
           puts orders.length
           orders.each do |od|
             puts od.to_s
           end
+
           @orders = orders
           respond_with @orders, each_serializer: OrderSerializer
 

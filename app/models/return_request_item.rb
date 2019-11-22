@@ -51,6 +51,8 @@ class ReturnRequestItem < ActiveRecord::Base
   REASON_CATEGORIES = REASON_CATEGORY_MAP.keys
   REASON_SUB_CATEGORIES = REASON_CATEGORY_MAP.values.flatten
 
+  LINE_ITEM_SELECT_MAP = {}
+
   attr_accessible :order_return_request, :line_item,  :line_item_id, :quantity, :action, :reason_category, :reason
 
   belongs_to :order_return_request
