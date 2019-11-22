@@ -9,9 +9,6 @@ module Api
         if params[:order_number].blank?
 
           orders = current_spree_user.orders
-          if orders.nil?
-            return  nil
-          end
           puts "current_spree_user.orders"
           orders = orders.to_a
           puts orders.length
