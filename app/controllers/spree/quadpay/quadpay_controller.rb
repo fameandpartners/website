@@ -163,8 +163,9 @@ module Spree
       end
 
       def notify
-        # puts "eeeeeeeeeeee"
-        # puts params.to_s
+        puts "uuuuuuuuuuuu notify params" + params.to_s
+        ret = {:status => :ok}
+        respond_with ret.to_json
       end
 
       # def update_order_steps
