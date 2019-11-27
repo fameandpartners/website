@@ -414,6 +414,7 @@ FameAndPartners::Application.routes.draw do
       get '/confirm', :to => "quadpay#confirm", :as => :confirm
       get '/cancel', :to => "quadpay#cancel", :as => :cancel
       get '/notify', :to => "quadpay#notify", :as => :notify
+      post '/notify', :to => "quadpay#notify", :as => :notify
     end
   end
 
