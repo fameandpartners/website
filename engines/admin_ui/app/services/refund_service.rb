@@ -6,7 +6,7 @@ class RefundService
 
   def process
     # manually fill in payment method
-    if gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id
+    if Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
       @refund_data["refund_method"] = "QuadpayPayment"
     else
       @refund_data["refund_method"] = @gateway.type.split('::').last
@@ -37,7 +37,7 @@ class RefundService
       response[:status] == "succeeded"
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       response.success?
-    elsif gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
       response.success?
     end
   end
@@ -62,7 +62,7 @@ class RefundService
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       item_return.refund_ref    = response.RefundTransactionID
       item_return.refunded_at   = Time.now
-    elsif gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
       item_return.refund_ref    = response.params['qp_order_id']
       item_return.refunded_at   = Time.now
     end
@@ -81,7 +81,7 @@ class RefundService
   def send_refund_request
     if gateway.type == "Spree::Gateway::PayPalExpress"
       gateway.refund_reparam(@refund_data['refund_amount'], item_return)
-    elsif gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
       gateway.refund_reparam(@refund_data['refund_amount'], item_return)
     else
       gateway.refund(refund_amount, item_return.order_payment_ref)
