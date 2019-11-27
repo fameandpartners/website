@@ -13,5 +13,10 @@ h3 = @item_return.order_payment_method
     => @item_return.order_payment_ref
     => @item_return.order_payment_date
     => @item_return.order_payment_date.try(:strftime, "%b")
+- elsif  @item_return.order_payment_method == 'ApplePayStripe'
+  p
+    => @item_return.order_payment_ref
+    => @item_return.order_payment_date
+    => @item_return.order_payment_date.try(:strftime, "%b")
 - else
   p Unknown Payment

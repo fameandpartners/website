@@ -196,6 +196,21 @@ module Reports
           end
         end
 
+        class ApplePayStripe < PaymentReportPresenter
+          def payment_type
+            'ApplePayStripe'
+          end
+
+          def payer_id
+            return 'Missing Payer' if source.nil?
+            source.gateway_payment_profile_id
+          end
+
+          def transaction_id
+            token
+          end
+        end
+
         class AfterpayPayment < PaymentReportPresenter
           def payment_type
             'AfterPay'

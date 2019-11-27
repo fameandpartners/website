@@ -20,5 +20,13 @@ module Spree
     def currency
       preferred_currency.presence || DEFAULT_CURRENCY
     end
+
+    def auto_capture?
+      true
+    end
+
+    def refund(amount, payment_code, gateway_options = {})
+      provider.refund(amount, payment_code, gateway_options)
+    end
   end
 end
