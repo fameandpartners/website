@@ -132,6 +132,7 @@ group :development do
   gem 'bullet'
   gem 'binding_of_caller'
   gem 'rack-handlers'
+  gem 'spring'
 end
 
 group :test do
