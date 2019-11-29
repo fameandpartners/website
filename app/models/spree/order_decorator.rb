@@ -25,14 +25,18 @@ Spree::Order.class_eval do
       if !order.payment_required?
         true
       elsif order.has_unprocessed_payments?
-        qd_payment = order.payments.find{|x| x.payment_method_id == Spree::Gateway::QuadpayPayment.payment_method.id }
-        if qd_payment.nil?
+        if Spree::Gateway::QuadpayPayment.payment_method.nil?
           true
         else
-          if qd_payment.state == "completed"
+          qd_payment = order.payments.find{|x| x.payment_method_id == Spree::Gateway::QuadpayPayment.payment_method.id }
+          if qd_payment.nil?
             true
           else
-            false
+            if qd_payment.state == "completed"
+              true
+            else
+              false
+            end
           end
         end
       else

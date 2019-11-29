@@ -27,6 +27,32 @@ module AdminUi
       def create
         @form = Forms::FabricForm.new(Fabric.new)
         if @form.validate(params[:forms_fabric])
+
+          # color
+          record_name = @form.name.split('-')[1]
+          record_name = record_name.lstrip
+          record_presentation = @form.presentation.split(@form.material)[0]
+          record_presentation = record_presentation.lstrip
+          option_value_record = Spree::OptionValue.create!(
+            :position => 1,
+            :name => record_name,
+            :presentation => record_presentation,
+            :option_type_id => 8,
+            :use_in_customisation => 'f'
+          )
+
+          # fabric color
+          fabric_color_value_record = Spree::OptionValue.create!(
+            :position => 1,
+            :name => @form.name,
+            :presentation => @form.presentation,
+            :option_type_id => 12,
+            :use_in_customisation => 'f'
+          )
+
+          @form.option_value_id = option_value_record.id
+          @form.option_fabric_color_value_id = fabric_color_value_record.id
+
           @form.save do |hash|
             hash["taxon_ids"] = [] unless params["forms_fabric"]["taxon_ids"]
             hash["image"] = nil unless params["forms_fabric"]["image"]

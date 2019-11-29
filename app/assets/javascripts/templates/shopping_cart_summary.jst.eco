@@ -109,7 +109,7 @@ $('.js-trigger-empty-cart-modal').modal({
 <div class="cart-footer">
 <div class="row js-returns-abc-option-B">
 </div>
-<div class="row">
+<!--<div class="row">
   <div class="col-xs-12">
     <form class="promo-code" action="#">
       <div class="input-group">
@@ -117,7 +117,7 @@ $('.js-trigger-empty-cart-modal').modal({
       </div>
     </form>
   </div>
-</div>
+</div>-->
   <div class="row">
     <div class="col-xs-12">
       <div class="cart-total">

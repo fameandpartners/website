@@ -407,6 +407,9 @@ Spree::CheckoutController.class_eval do
   end
 
   def destroy_uncompleted_qd_payment
+    if Spree::Gateway::QuadpayPayment.payment_method.nil?
+      return
+    end
     load_order
     if @order.nil?
       return
