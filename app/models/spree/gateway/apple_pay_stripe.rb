@@ -13,10 +13,6 @@ module Spree
 
     DEFAULT_CURRENCY = 'USD'
 
-    def method_type
-      'apple_pay_stripe'
-    end
-
     def currency
       preferred_currency.presence || DEFAULT_CURRENCY
     end

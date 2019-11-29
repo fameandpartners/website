@@ -409,7 +409,7 @@ Spree::CheckoutController.class_eval do
     end
 
     @apple_pay_method = @order.available_payment_methods.detect do |method|
-      method.method_type == 'apple_pay_stripe' && current_site_version.currency == method.currency
+      method.is_a?(Spree::Gateway::ApplePayStripe) && current_site_version.currency == method.currency
     end
   end
 
