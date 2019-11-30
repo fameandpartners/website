@@ -72,7 +72,7 @@ namespace :newgistics do
               failed_item_skus = failed_items.map { |li| CustomItemSku.new(li).call }
 
               puts item
-              if item['ReturnReason'].downcase.include?('quarantine')
+              if item['ReturnReason']&.downcase&.include?('quarantine')
                 puts "quarantine"
                 puts item
                 #QuarantinedReturnsMailer.email(order, item_return['Items']['Item'])
