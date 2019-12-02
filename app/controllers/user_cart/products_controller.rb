@@ -84,7 +84,6 @@ class UserCart::ProductsController < UserCart::BaseController
         }
       end
     end
-    puts "create: end " + session[:order_id]&.to_s
   end
 
   def create_line_item_making_option
