@@ -17,7 +17,6 @@ jobs:
           POSTGRES_DB: circle-test_test
       - image: redis
       - image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
-      - image: circleci/python:3.7.2
 
     working_directory: ~/repo
 
@@ -164,10 +163,10 @@ jobs:
       - run:
           name: Start test
           command: |
-            if [ "${CIRCLE_BRANCH}" == "pr" ]; then
-              curl -X POST --data "{"text": 'product'}" https://1880671636622620.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              curl -X POST --data "{"text": 'product'}" https://1180051544756419.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
             elif [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              curl -X POST --data "{"text": 'qa4'}" https://1880671636622620.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
+              curl -X POST --data "{"text": 'qa4'}" https://1180051544756419.us-west-1.fc.aliyuncs.com/2016-08-15/proxy/FPwebsiteTest/FPwebsiteTestHttpTrigger/
             fi
           when: on_success
         
