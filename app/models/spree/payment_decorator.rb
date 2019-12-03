@@ -1,4 +1,8 @@
 Spree::Payment.class_eval do
+
+  #has_many :quad_pay_orders
+  attr_accessor :response_code
+
   def gateway_options
     options = { :email    => order.email,
                 :customer => order.email,
@@ -23,5 +27,28 @@ Spree::Payment.class_eval do
     options.merge!(:description => "Order ##{gateway_order_id}")
 
     options
+  end
+
+  def quadpay_order
+    if response_code && !response_code.blank?
+      Spree::QuadpayOrder.where(qp_order_id: response_code)&.first
+    elsif source_type == "Spree::QuadpayOrder" && source_id
+      qp_order = Spree::QuadpayOrder.find(source_id)
+      if qp_order
+        update_attributes({:response_code => qp_order.qp_order_id}, :without_protection => true)
+        qp_order
+      end
+      qp_order
+    else
+      nil
+    end
+  end
+  def update_qp_order_id
+    if (!response_code || response_code.blank?) && source_type == "Spree::QuadpayOrder" && source_id
+      qp_order = Spree::QuadpayOrder.find(source_id)
+      if qp_order
+        update_attributes({:response_code => qp_order.qp_order_id}, :without_protection => true)
+      end
+    end
   end
 end

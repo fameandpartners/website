@@ -63,7 +63,6 @@ module Feeds
 
       logger.info "Fetching Items. Total: #{total}"
 
-      # product_scope.each do |product|
       product_scope.find_each(batch_size: 10) do |product|
         index += 1
         logger_product_name  = "Product: #{product.name}"
@@ -99,6 +98,11 @@ module Feeds
         sale_price = curation.discount_price_in(current_site_version.currency)
       end
 
+      curation_description = curation.description
+      if curation.description.blank?
+        curation_description = product.description
+      end
+
       item = HashWithIndifferentAccess.new(
         # variant:                 variant,
         path:                    helpers.collection_product_path(curation),
@@ -108,7 +112,7 @@ module Feeds
         product_sku:             product.sku,
         availability:            availability,
         title:                   "#{color_presentation} #{curation.name || product.name}",
-        description:             helpers.strip_tags(curation.description || product.description),
+        description:             helpers.strip_tags(curation_description),
         price:                   original_price,
         sale_price:              sale_price,
         google_product_category: 'Apparel & Accessories > Clothing > Dresses > Formal Gowns',

@@ -378,6 +378,7 @@
         border-radius: 0;
         background: none;
         color: $c-neutral-black;
+        height: 85px;
       }
 
       // Only first element / Elements in the middle
@@ -407,6 +408,12 @@
       i {
         display: block;
         padding-bottom: 5px;
+      }
+      o {
+        font-size: 0rem;
+        //display: block;
+        padding-bottom: 0px;
+        margin-bottom: -10px;
       }
 
     }
@@ -446,7 +453,45 @@
     .payment,
     .separator {
       display: inline-block;
-      padding: 0 8px;
+      padding: 0 4px;
+      line-height: 1;
+    }
+
+    .separator {
+      vertical-align: top;
+      line-height: 50px;
+      color: $c-neutral-8;
+    }
+
+    .to-pay {
+      margin-bottom: 5px;
+      font-size: 1.7em;
+      color: $c-blue;
+    }
+
+    .time-period {
+      font-size: 0.875em;
+      font-weight: 500;
+      color: $c-neutral-black;
+    }
+
+  }
+
+  .panel-quadpay {
+
+    a:not(.btn) {
+      text-decoration: underline;
+      color: inherit;
+    }
+
+    .payments {
+      margin: 30px 0;
+    }
+
+    .payment,
+    .separator {
+      display: inline-block;
+      padding: 0 4px;
       line-height: 1;
     }
 

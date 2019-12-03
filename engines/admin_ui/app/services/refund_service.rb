@@ -6,7 +6,12 @@ class RefundService
 
   def process
     # manually fill in payment method
-    @refund_data["refund_method"] = gateway.type.split('::').last
+    if Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
+      @refund_data["refund_method"] = "QuadpayPayment"
+    else
+      @refund_data["refund_method"] = @gateway.type.split('::').last
+    end
+
     if refund_event.valid?
       response = send_refund_request
       if response_success?(response)#response.success?
@@ -32,12 +37,20 @@ class RefundService
       response[:status] == "succeeded"
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       response.success?
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
+      response.success?
     end
   end
 
   def process_save_status(response)
     item_return.refund_status = 'Complete'
-    item_return.refund_method = @gateway.type.split('::').last
+
+    if gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id
+      item_return.refund_method = "QuadpayPayment"
+    else
+      item_return.refund_method = @gateway.type.split('::').last
+    end
+
     item_return.refund_amount = Money.parse(refund_amount).amount
 
     if gateway.type == "Spree::Gateway::Pin"
@@ -48,6 +61,9 @@ class RefundService
       item_return.refunded_at   = Time.now
     elsif gateway.type == "Spree::Gateway::PayPalExpress"
       item_return.refund_ref    = response.RefundTransactionID
+      item_return.refunded_at   = Time.now
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
+      item_return.refund_ref    = response.params['qp_order_id']
       item_return.refunded_at   = Time.now
     end
 
@@ -65,6 +81,8 @@ class RefundService
   def send_refund_request
     if gateway.type == "Spree::Gateway::PayPalExpress"
       gateway.refund_reparam(@refund_data['refund_amount'], item_return)
+    elsif Spree::Gateway::QuadpayPayment.payment_method and (gateway.id == Spree::Gateway::QuadpayPayment.payment_method.id)
+      gateway.refund_reparam(@refund_data['refund_amount'], item_return)
     else
       gateway.refund(refund_amount, item_return.order_payment_ref)
     end
@@ -76,6 +94,7 @@ class RefundService
 
   def gateway
     # safe to take first cause there's only ever 1 payment method
+    puts "payment method id : " + item_return.line_item.order.payments.first.payment_method_id.to_s
     @gateway ||= Spree::PaymentMethod.find(item_return.line_item.order.payments.first.payment_method_id)
   end
 

@@ -224,6 +224,32 @@ module Reports
             '-'
           end
         end
+        class QuadpayPayment < PaymentReportPresenter
+          def initialize(payment)
+            puts "QuadpayPayment initialize"
+            @qp_payment = payment
+            super(payment)
+          end
+          def payment_type
+            'Quadpay'
+          end
+
+          def token
+            @qp_payment.quadpay_order.qp_order_token
+          end
+
+          def payer_id
+            @qp_payment.source_id
+          end
+
+          def transaction_id
+            @qp_payment.source_id
+          end
+
+          def card_type
+            'quadpay'
+          end
+        end
       end
     end
   end

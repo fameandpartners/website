@@ -76,7 +76,7 @@ module ReturnsProcessesControllerHelper
         :return_request_items_attributes => obj[:line_items]
       }
     }
-
+    puts "OrderReturnRequest.new"
     @order_return = OrderReturnRequest.new(return_request[:order_return_request])
 
     @order_return.save
