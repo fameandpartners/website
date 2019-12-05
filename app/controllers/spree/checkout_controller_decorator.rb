@@ -20,7 +20,6 @@ Spree::CheckoutController.class_eval do
   }
 
   def edit
-    puts "edit: " + session[:order_id]&.to_s
     prepare_order
     find_payment_methods
     update_line_item_delivery
