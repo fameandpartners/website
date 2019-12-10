@@ -21,7 +21,28 @@ Spree::Order.class_eval do
       order.payment_required?
     }
     go_to_state :confirm, :if => lambda { |order| order.confirmation_required? }
-    go_to_state :complete, :if => lambda { |order| (order.payment_required? && order.has_unprocessed_payments?) || !order.payment_required? }
+    go_to_state :complete, :if => lambda { |order|
+      if !order.payment_required?
+        true
+      elsif order.has_unprocessed_payments?
+        if Spree::Gateway::QuadpayPayment.payment_method.nil?
+          true
+        else
+          qd_payment = order.payments.find{|x| x.payment_method_id == Spree::Gateway::QuadpayPayment.payment_method.id }
+          if qd_payment.nil?
+            true
+          else
+            if qd_payment.state == "completed"
+              true
+            else
+              false
+            end
+          end
+        end
+      else
+        false
+      end
+    }
   end
 
   scope :hydrated, -> { includes(HYDRATED_INCLUDES) }

@@ -129,6 +129,21 @@
 
 }
 
+.btn-disabled,
+.btnCtaBlackBgUppercase {
+  background: $c-neutral-6;
+  color: $c-neutral-white;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background: $c-neutral-6;
+    color: $c-neutral-white;
+  }
+
+}
+
 .btn-tiny {
   padding: 5px;
   text-transform: none;
