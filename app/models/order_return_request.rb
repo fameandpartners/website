@@ -9,6 +9,7 @@ class OrderReturnRequest < ActiveRecord::Base
   accepts_nested_attributes_for :return_request_items
 
   def build_items
+    puts "OrderReturnRequest.build_items"
     order.line_items.each do |line_item|
       return_request_items.build(:order_return_request => self, :line_item => line_item)
     end

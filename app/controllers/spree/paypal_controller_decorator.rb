@@ -5,6 +5,13 @@ Spree::PaypalController.class_eval do
 
   before_filter :update_order_steps, only: [:confirm]
 
+  #test
+  # def express
+  #
+  #
+  # end
+
+
   def express
     items = current_order.line_items.map do |item|
       {

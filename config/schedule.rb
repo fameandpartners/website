@@ -54,3 +54,7 @@ every(1.day) {
 #every(1.week) {
 #  rake 'newgistics:upload_order_list' } #Order file that needs to be shipped out by Newgistics; not needed yet
 #}
+
+# every 1.minute do # 1.minute 1.day 1.week 1.month 1.year is also supported
+#   rake "quad_pay_tasks:sync_orders"
+# end

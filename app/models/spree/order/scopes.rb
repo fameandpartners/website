@@ -4,7 +4,9 @@ module Spree
       def completed
         self.where(arel_table[:completed_at].not_eq(nil))
       end
-
+      def valid_orders
+        self.where("item_total > 0")
+      end
       def shipment_states
         # This is literally 1000 times faster than `uniq.pluck(:shipment_state)`
         # See https://wiki.postgresql.org/wiki/Loose_indexscan

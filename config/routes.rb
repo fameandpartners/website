@@ -13,7 +13,6 @@ FameAndPartners::Application.routes.draw do
   # Feed files redirections. They live above any `/us` + `/au` redirection
   ###################################################################
   get '/au/feeds/products/shopstyle.xml', to: 'marketing/feeds/shopstyle#au_feed'
-
   ########################
   # US Redirection to root
   ########################
@@ -278,6 +277,18 @@ FameAndPartners::Application.routes.draw do
 
   post '/checkout/update/:state', :to => 'spree/checkout#update', :as => :update_checkout
 
+  # namespace :admin do
+  #   # Using :only here so it doesn't redraw those routes
+  #   resources :orders, :only => [] do
+  #     resources :payments, :only => [] do
+  #       member do
+  #         get 'paypal_refund'
+  #         post 'paypal_refund'
+  #       end
+  #     end
+  #   end
+  # end
+
   # Guest checkout routes
   resources :payment_requests, only: [:new, :create]
 
@@ -300,6 +311,7 @@ FameAndPartners::Application.routes.draw do
     resources :bulk_order_updates, :except => [:edit]
     resources :fabrications,       :only => :update
     resources :shipments,          :only => :update
+    get '/numbers', :to => "numbers#index"
   end
 
   # ----------
@@ -397,6 +409,12 @@ FameAndPartners::Application.routes.draw do
       get 'modals' => 'modals#index'
 
       get 'search/order_owners' => 'search#order_owners'
+    end
+    namespace :quadpay do
+      post '/', :to => "quadpay#express", :as => :express
+      get '/confirm', :to => "quadpay#confirm", :as => :confirm
+      get '/cancel', :to => "quadpay#cancel", :as => :cancel
+      get '/notify', :to => "quadpay#notify", :as => :notify
     end
   end
 

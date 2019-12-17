@@ -121,6 +121,9 @@ class ItemReturnCalculator < EventSourcedRecord::Calculator
 
   def advance_manual_order_return(event)
     event.data.map do |k,v|
+      if k == "line_item_number"
+        k = "line_item_id"
+      end
       next if %i( manual_order_data user comment ).include?(k.to_sym)
       @item_return.send("#{k}=", v)
     end
