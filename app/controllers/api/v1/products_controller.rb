@@ -551,6 +551,31 @@ module Api
                     }]
                 }]
             } || nil,
+
+            product.making_options.exists? && {
+              id: 124,
+              title: 'Making',
+              selectionTitle: 'Choose your delivery options',
+              changeButtonText: "Select",
+              slug: 'making',
+              hidden: true,
+              sectionGroups: [
+                {
+                  title: 'Making',
+                  slug: 'making',
+                  previewType: :cad,
+                  renderPositionId: 'FrontNone',
+                  sections: [
+                    {
+                      componentTypeId: :Making,
+                      componentTypeCategory: :Making,
+                      title: "Do your making option",
+                      options: product.making_options.map { |making| { code: making.making_option.code, isDefault: false, parentOptionId: nil } },
+                      selectionType: :OptionalOne
+                    }]
+                }
+              ]
+            } || nil,
           ].flatten.compact,
 
           media: images
@@ -660,7 +685,8 @@ module Api
           type: :Making,
           sortOrder: making.making_option.position,
           meta: {
-            deliveryTimeRange: making.making_option.display_delivery_period(Time.now)
+            deliveryTimeRange: making.making_option.display_delivery_period(Time.now),
+            deliveryTimeDescription: making.making_option.description
           },
           incompatibleWith: { allOptions: [] },
         }
