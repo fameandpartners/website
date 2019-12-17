@@ -1,5 +1,5 @@
 class LayerCad < ActiveRecord::Base
-  attr_accessible :base_image_name, :position, :customizations_enabled_for, :layer_image_name, :product_id, :width, :height
+  attr_accessible :base_image, :layer_image, :base_image_name, :position, :customizations_enabled_for, :layer_image_name, :product_id, :width, :height
   serialize :customizations_enabled_for
 
   belongs_to :product, class_name: 'Spree::Product'
