@@ -38,7 +38,6 @@ class UserCart::ProductsController < UserCart::BaseController
   end
 
   def create
-    puts "create: " + session[:order_id]&.to_s
     cart_populator = UserCart::Populator.new(
       order: current_order_for_add_to_cart(true),
       site_version: current_site_version,
@@ -67,7 +66,7 @@ class UserCart::ProductsController < UserCart::BaseController
       end
 
       current_order_for_add_to_cart.hydrate
-      
+
       respond_with(current_order_for_add_to_cart) do |format|
         format.json   {
           render json: current_order_for_add_to_cart, serializer: OrderSerializer, status: :ok
@@ -85,7 +84,6 @@ class UserCart::ProductsController < UserCart::BaseController
         }
       end
     end
-    puts "create: end " + session[:order_id]&.to_s
   end
 
   def create_line_item_making_option
@@ -142,14 +140,14 @@ class UserCart::ProductsController < UserCart::BaseController
     line_item_ids.each do |line_item_id|
       li = Spree::LineItem.find(line_item_id)
       next if li.order.completed?
-      
+
       if populator.populate(line_item: [line_item_id.to_i])
         fire_event('spree.cart.add')
         fire_event('spree.order.contents_changed')
 
         current_order_for_add_to_cart.reload
       end
-      
+
     end
   end
 

@@ -1,5 +1,5 @@
 class MakingOption < ActiveRecord::Base
-  attr_accessible :code, :name, :description, :delivery_period, :cny_delivery_period, :making_time_business_days, :cny_making_time_business_days, :flat_price_usd, 
+  attr_accessible :code, :name, :description, :delivery_period, :cny_delivery_period, :making_time_business_days, :cny_making_time_business_days, :flat_price_usd,
     :flat_price_aud, :percent_price_usd, :percent_price_aud, :position,
     :delivery_time_days, :cny_delivery_time_days
 
@@ -39,10 +39,10 @@ class MakingOption < ActiveRecord::Base
 
   def self.display_price(flat, percent, currency)
     if percent && percent != 0
-      if percent < 0 
+      if percent < 0
         (percent*100*(-1)).round.to_s + '% OFF'
       else
-        '+' + percent*100.round.to_s + '%'
+        '+' + (percent*100).round.to_s + '%'
       end
     elsif flat && flat != 0
       '$' + '%.2f' % flat
