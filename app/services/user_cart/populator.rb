@@ -190,14 +190,18 @@ class Populator
       end
     end
 
-    def product_making_options
-      @product_making_options ||= begin
-        pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+  def product_making_options
+    @product_making_options ||= begin
+      pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+      if product.name == 'Swatch'
         pmo = product.making_options.where(default: true, active: true).to_a if pmo.empty?
-
-        pmo
+      else
+        pmo = product.making_options.where(making_option_id: [4,12,15], active: true).to_a if pmo.empty?
       end
+
+      pmo
     end
+  end
 
     def product_quantity
       product_attributes[:quantity].to_i > 0 ?  product_attributes[:quantity].to_i : 1
