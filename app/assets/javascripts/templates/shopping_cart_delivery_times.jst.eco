@@ -27,7 +27,7 @@
               data-line-item-index="<%= i %>"
             >
               <% for mo in product.available_making_options: %>
-                <% if mo.presentation == "Standard Delivery" && mo.delivery_period != "5 - 7 days": %>
+                <% if product.name == 'Swatch' || (mo.name == "M60D"  || mo.name == "M12W" || mo.name == "M10W"): %>
                   <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
                     <div class="Radio">
                       <input
@@ -51,10 +51,10 @@
                   </div>
                 <% end %>
               <% end %>
-
             </fieldset>
           </div>
         </section>
       </div>
     <% end %>
   <% end %>
+
