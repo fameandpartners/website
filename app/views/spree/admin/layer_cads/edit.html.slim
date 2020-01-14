@@ -10,6 +10,9 @@
 
 = render 'spree/shared/error_messages', target: @layer_cad
 
+p
+  = @layer_cad.base_image_name ? :base : :layer
+
 #new_layer_cad data-hook="new-product-accessory"
 
 = form_for [:admin, @product, @layer_cad], url: admin_product_layer_cad_path(@product, @layer_cad), :method => :put, :html => { :multipart => true } do |f|

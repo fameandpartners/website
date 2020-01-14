@@ -1,5 +1,5 @@
 class Fabric < ActiveRecord::Base
-  attr_accessible :name, :presentation, :production_code, :image, :material, :taxon_ids
+  attr_accessible :name, :presentation, :production_code, :image, :material, :taxon_ids, :option_fabric_color_value_id, :option_value_id
   belongs_to :option_value,
  	     class_name: 'Spree::OptionValue'
 
