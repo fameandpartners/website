@@ -16,30 +16,30 @@
 #      }
 #    )
 module UserCart
-class Populator
-  attr_reader :site_version, :order, :currency, :product_attributes
+  class Populator
+    attr_reader :site_version, :order, :currency, :product_attributes
 
-  def initialize(options = {})
-    @order            = options[:order]
-    @site_version     = options[:site_version] || SiteVersion.default
-    @currency         = options[:currency]  || site_version.try(:currency)
-    @product_attributes = HashWithIndifferentAccess.new(options[:product] || {})
-  end
+    def initialize(options = {})
+      @order            = options[:order]
+      @site_version     = options[:site_version] || SiteVersion.default
+      @currency         = options[:currency]  || site_version.try(:currency)
+      @product_attributes = HashWithIndifferentAccess.new(options[:product] || {})
+    end
 
-  def populate
-    add_personalized_product
+    def populate
+      add_personalized_product
 
-    order.update!
-    order.reload
+      order.update!
+      order.reload
 
-    return OpenStruct.new({
-      success: true,
-    })
-  rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
-    OpenStruct.new({ success: false, message: e.message })
-  end
+      return OpenStruct.new({
+                              success: true,
+                            })
+    rescue Errors::ProductOptionsNotCompatible, Errors::ProductOptionNotAvailable => e
+      OpenStruct.new({ success: false, message: e.message })
+    end
 
-  private
+    private
     def add_product_to_cart
       spree_populator = Spree::OrderPopulator.new(order, currency)
       if spree_populator.populate(variants: { product_variant.id => product_quantity })
@@ -61,7 +61,7 @@ class Populator
         if product_fabric
           line_item.fabric = product_fabric
           fp = FabricsProduct.find_by_fabric_id_and_product_id(product_fabric.id, product.id)
-          line_item.fabric_price = fp&.discount_price_in(currency) 
+          line_item.fabric_price = fp&.discount_price_in(currency)
         end
         line_item.curation_name = product_attributes[:curation_name]
         line_item.personalization = build_personalization(line_item)
@@ -79,7 +79,7 @@ class Populator
       LineItemPersonalization.new.tap do |item|
         item.size_id  = product_size&.id
         item['size']  = product_size&.value
-        
+
         if product_fabric
           item.color_id = product_fabric.option_value_id
           item['color'] = product_fabric.option_value.name
@@ -190,14 +190,18 @@ class Populator
       end
     end
 
-  def product_making_options
-    @product_making_options ||= begin
-      pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
-      pmo = product.making_options.where(default: true, active: true).to_a if pmo.empty?
+    def product_making_options
+      @product_making_options ||= begin
+        pmo = product.making_options.where(id: Array.wrap(product_attributes[:making_options_ids])).to_a
+        if product.name == 'Swatch'
+          pmo = product.making_options.where(default: true, active: true).to_a if pmo.empty?
+        else
+          pmo = product.making_options.where(making_option_id: [4,12,15], active: true).to_a if pmo.empty?
+        end
 
-      pmo
+        pmo
+      end
     end
-  end
 
     def product_quantity
       product_attributes[:quantity].to_i > 0 ?  product_attributes[:quantity].to_i : 1
@@ -211,21 +215,21 @@ class Populator
     def price_customization_by_currency(customizations_json)
       customization_arry = customizations_json.map do |customization|
 
-          {
-            'customisation_value' => {
-              'id' => customization.id,
-              'name' => customization.name,
-              'manifacturing_sort_order' => customization.manifacturing_sort_order,
-              'price' => customization.price_aud && currency == 'AUD' ? customization.price_aud : customization.price,
-              'presentation' => customization.presentation,
-              'discount' => customization.discount&.amount
-            }
+        {
+          'customisation_value' => {
+            'id' => customization.id,
+            'name' => customization.name,
+            'manifacturing_sort_order' => customization.manifacturing_sort_order,
+            'price' => customization.price_aud && currency == 'AUD' ? customization.price_aud : customization.price,
+            'presentation' => customization.presentation,
+            'discount' => customization.discount&.amount
           }
+        }
 
       end
 
       customization_arry
     end
 
-end
+  end
 end
