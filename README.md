@@ -1,6 +1,6 @@
 # Welcome to Fame & Partners [![Status](https://circleci.com/gh/fameandpartners/website/tree/master.png?circle-token=ee3bbb5414da6e449d774074ecc31fec5a18dce0)](https://circleci.com/gh/fameandpartners/website)
 
-## System Requirements
+## System Requirements 
 
 * Ruby 2.1.6
 * Postgres 9.5
