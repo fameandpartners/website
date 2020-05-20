@@ -25,6 +25,8 @@ include Newgistics::NewgisticsHelper
     def fetch_shipping_label_from_api
       puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api----------------UUUUUUUUUU"
       uri = URI(configatron.newgistics.uri)
+      puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api URL----------------UUUUUUUUUU"
+      puts "#{configatron.newgistics.uri}"
       request = Net::HTTP::Post.new(
         uri,
         {
@@ -33,6 +35,8 @@ include Newgistics::NewgisticsHelper
           'x-api-key' => configatron.newgistics.api_key
         }
       )
+      puts "configatron.newgistics.api_key"
+      puts "#{configatron.newgistics.api_key}"
       request.body = make_request_map.to_json
       puts "UUUUUUUUUUUUUUUUU-------request.body"
       puts request.body
