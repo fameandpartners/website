@@ -23,6 +23,7 @@ include Newgistics::NewgisticsHelper
     end
 
     def fetch_shipping_label_from_api
+      puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api----------------UUUUUUUUUU"
       uri = URI(configatron.newgistics.uri)
       request = Net::HTTP::Post.new(
         uri,
