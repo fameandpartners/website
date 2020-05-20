@@ -64,7 +64,8 @@ module ReturnsProcessesControllerHelper
   end
 
   def process_returns(obj, return_label)
-		order = Spree::Order.find_by_number(obj[:order_number])
+    puts "UUUUUUUUUUUUUUUUU-------process_returns ----------------UUUUUUUUUU"
+    order = Spree::Order.find_by_number(obj[:order_number])
 
 		if order.nil?
 			return
@@ -100,6 +101,7 @@ module ReturnsProcessesControllerHelper
 
 
   def self.create_label(order_number)
+    puts "UUUUUUUUUUUUUUUUU-------create_label----------------UUUUUUUUUU"
     order = Spree::Order.find_by_number(order_number)
 
     label = Newgistics::ShippingLabel.new(
@@ -109,10 +111,11 @@ module ReturnsProcessesControllerHelper
       order.email,
       order.number
     )
-
+    puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api before----------------UUUUUUUUUU"
     if(label.fetch_shipping_label_from_api.nil?)
       return nil
     end
+    puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api  after----------------UUUUUUUUUU"
     item_return_label = ItemReturnLabel.new(
       :label_image_url => label.label_image_url,
       :label_pdf_url => label.label_pdf_url,
@@ -120,6 +123,7 @@ module ReturnsProcessesControllerHelper
       :carrier => label.carrier,
       :barcode => label.barcode
       )
+    puts "UUUUUUUUUUUUUUUUU-------ItemReturnLabel  create----------------UUUUUUUUUU"
   end
 
   def error_response(err, *err_code)
