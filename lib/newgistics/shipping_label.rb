@@ -34,12 +34,15 @@ include Newgistics::NewgisticsHelper
         }
       )
       request.body = make_request_map.to_json
-
+      puts "UUUUUUUUUUUUUUUUU-------request.body"
+      puts request.body
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == "https")
       response = http.request(request)
       if(response.kind_of? Net::HTTPSuccess)
         puts "UUUUUUUUUUUUUUUUU-------Net::HTTPSuccess"
+        puts "UUUUUUUUUUUUUUUUU-------response"
+        puts response.body
         convert_json_to_instance_variables(JSON.parse(response.body))
       else
         puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api return nil ----------------UUUUUUUUUU"
