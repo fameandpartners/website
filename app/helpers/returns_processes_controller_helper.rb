@@ -104,7 +104,7 @@ module ReturnsProcessesControllerHelper
     puts "UUUUUUUUUUUUUUUUU-------create_label----------------UUUUUUUUUU"
     order = Spree::Order.find_by_number(order_number)
 
-    label = Newgistics::ShippingLabel.new(
+    label = ShipEngine::ShippingLabel.new(
       order.user_first_name,
       order.user_last_name,
       order.shipping_address,

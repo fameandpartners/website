@@ -40,7 +40,7 @@ module ShipEngine
       # else
       #   nil
       # end
-
+      puts "SSSSSSSS-------fetch_shipping_label_from_api--------SSSSSSSS"
       url = URI("http://api.shipengine.com/v1/labels")
       https = Net::HTTP.new(url.host, url.port);
       https.use_ssl = false
@@ -52,8 +52,10 @@ module ShipEngine
       request.body = make_request_map.to_json
       response = https.request(request)
       if(response.kind_of? Net::HTTPSuccess)
+        puts "SSSSSSSS-------fetch_shipping_label_from_api HTTPSuccess --------SSSSSSSS"
         convert_json_to_instance_variables(JSON.parse(response.read_body))
       else
+        puts "SSSSSSSS-------fetch_shipping_label_from_api nil --------SSSSSSSS"
         nil
       end
     end
@@ -138,6 +140,8 @@ module ShipEngine
     end
 
     def convert_json_to_instance_variables(json)
+      puts "SSSSSSSS-------convert_json_to_instance_variables HTTPSuccess --------SSSSSSSS"
+      puts json.to_hash
       lable_hash = json.to_hash
       if lable_hash.has_key?("label_download")
         @label_url = lable_hash["label_download"]["pdf"]
