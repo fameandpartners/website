@@ -1,4 +1,4 @@
-require 'ship_engine'
+require 'ship_engine/ship_engine'
 module ReturnsProcessesControllerHelper
 
   ERROR_MESSAGES = {
