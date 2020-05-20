@@ -7,6 +7,7 @@ module ShipEngine
                   :label_pdf_url,
                   :barcode
     def initialize(first_name, last_name, address, email, return_id)
+      puts "SSSSSSSSSSSSSSSSSS-------ShippingLabel:initialize----------------SSSSSSSSSSSSSSSSSS"
       @first_name = first_name
       @last_name = last_name
       @email = email
@@ -18,6 +19,13 @@ module ShipEngine
       @zip = address.zipcode
       @return_id = return_id
       @address = address
+      puts first_name
+      puts last_name
+      puts email
+      puts address.address1
+      puts address.address2
+      puts address.city
+      puts address.state&.abbr
     end
 
     def fetch_shipping_label_from_api
