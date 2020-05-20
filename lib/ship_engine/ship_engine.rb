@@ -57,7 +57,8 @@ module ShipEngine
       request["Host"] = "api.shipengine.com"
       request["API-Key"] = "lSapg0JYROO4iUnGb4OKBKs0ehKQkzD4whGO1+GZRaA"
       request["Content-Type"] = "application/json"
-      request.body = make_request_map.to_json
+      request.body = "{\n  \"shipment\": {\n    \"service_code\": \"ups_ground\",\n    \"ship_to\": {\n      \"name\": \"Jane Doe\",\n      \"address_line1\": \"525 S Winchester Blvd\",\n      \"city_locality\": \"San Jose\",\n      \"state_province\": \"CA\",\n      \"postal_code\": \"95128\",\n      \"country_code\": \"US\",\n      \"address_residential_indicator\": \"yes\"\n    },\n    \"ship_from\": {\n      \"name\": \"John Doe\",\n      \"company_name\": \"Example Corp\",\n      \"phone\": \"555-555-5555\",\n      \"address_line1\": \"4009 Marathon Blvd\",\n      \"city_locality\": \"Austin\",\n      \"state_province\": \"TX\",\n      \"postal_code\": \"78756\",\n      \"country_code\": \"US\",\n      \"address_residential_indicator\": \"no\"\n    },\n    \"packages\": [\n      {\n        \"weight\": {\n          \"value\": 20,\n          \"unit\": \"ounce\"\n        },\n        \"dimensions\": {\n          \"height\": 6,\n          \"width\": 12,\n          \"length\": 24,\n          \"unit\": \"inch\"\n        }\n      }\n    ]\n  }\n}"
+
       response = https.request(request)
       if(response.kind_of? Net::HTTPSuccess)
         puts "SSSSSSSS-------fetch_shipping_label_from_api HTTPSuccess --------SSSSSSSS"
