@@ -39,8 +39,10 @@ include Newgistics::NewgisticsHelper
       http.use_ssl = (uri.scheme == "https")
       response = http.request(request)
       if(response.kind_of? Net::HTTPSuccess)
+        puts "UUUUUUUUUUUUUUUUU-------Net::HTTPSuccess"
         convert_json_to_instance_variables(JSON.parse(response.body))
       else
+        puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api return nil ----------------UUUUUUUUUU"
         nil
       end
     end
@@ -86,10 +88,13 @@ include Newgistics::NewgisticsHelper
     end
 
     def convert_json_to_instance_variables(json)
+      puts "UUUUUUUUUUUUUUUUU-------convert_json_to_instance_variables return nil ----------------UUUUUUUUUU"
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
       @barcode = json['transporter']['Barcode'] # is actually the tracking number
-
+      puts "UUUUUUUUUUUUUUUUU-------@label_url:#{ @label_url}"
+      puts "UUUUUUUUUUUUUUUUU-------@carrier: #{ @carrier}"
+      puts "UUUUUUUUUUUUUUUUU-------@barcode:#{ @barcode}"
       json['links'].each do |link|
         if link['rel'] == 'label/image'
           @label_image_url = link['href']
