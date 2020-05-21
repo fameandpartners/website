@@ -78,18 +78,19 @@ module ReturnsProcessesControllerHelper
         :return_request_items_attributes => obj[:line_items]
       }
     }
-    puts "OrderReturnRequest.new"
+
+    puts "UUUUUUUUUUUUUUUUU-------OrderReturnRequest.new ----------------UUUUUUUUUU"
     @order_return = OrderReturnRequest.new(return_request[:order_return_request])
 
     @order_return.save
-
+    puts "UUUUUUUUUUUUUUUUU-------@order_return.save ----------------UUUUUUUUUU"
     if (has_us_shipping_address?(order.number))
       return_label.save
       @order_return.return_request_items.each do |x|
         x.item_return.item_return_label = return_label
         x.item_return.save!
       end
-
+      puts "UUUUUUUUUUUUUUUUU-------if (has_us_shipping_address?(order.number)) @order_return.save ----------------UUUUUUUUUU"
       @order_return.save
     end
 
@@ -152,6 +153,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def success_response(request_id)
+    puts "UUUUUUUUUUUUUUUUU-------success_response----------------UUUUUUUUUU"
     payload = {
 			request_id: request_id,
       status: 200
@@ -164,6 +166,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def start_bergen_return_process(order_return)
+    puts "UUUUUUUUUUUUUUUUU-------start_bergen_return_process----------------UUUUUUUUUU"
     order_return.return_request_items.each do |rri|
       Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
     end
@@ -172,6 +175,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def start_next_logistics_process(order_return)
+    puts "UUUUUUUUUUUUUUUUU-------start_next_logistics_process----------------UUUUUUUUUU"
     if Features.active?(:next_logistics)
       NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
     end

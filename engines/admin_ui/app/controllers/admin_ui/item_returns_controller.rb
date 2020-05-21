@@ -81,7 +81,11 @@ module AdminUi
     def generate_new_return_label
       item_return = ItemReturn.find(params[:item_return_id])
       order = Spree::Order.find_by_number(item_return.order_number)
+      puts "SSSS-------------generate_new_return_label create_label before-------------SSSS"
       label = ReturnsProcessesControllerHelper.create_label(order.number)
+      puts "SSSS-------------generate_new_return_label create_label after-------------SSSS"
+      puts "SSSS-------------generate_new_return_label label.label_pdf_url-------------SSSS"
+      puts label.label_pdf_url
       redirect_to label.nil? ? item_return_path(item_return) : label.label_pdf_url
     end
 
