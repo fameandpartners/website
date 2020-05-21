@@ -125,7 +125,12 @@ module ReturnsProcessesControllerHelper
       :carrier => label.carrier,
       :barcode => label.barcode
       )
+    puts "/n/n/n"
+    puts "label_image_url#{label.label_image_url}"
+    puts "label_image_url#{label.label_pdf_url}"
+    puts "/n/n/n"
     puts "UUUUUUUUUUUUUUUUU-------ItemReturnLabel  create----------------UUUUUUUUUU"
+    item_return_label
   end
 
   def error_response(err, *err_code)
