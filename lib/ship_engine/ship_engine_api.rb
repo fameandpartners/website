@@ -6,10 +6,10 @@ module ShipEngine
   class ShippingLabelAPI
     def tracking_package( lable_id)
       puts "SSSSSSSS-------fetch_shipping_label_from_api--------SSSSSSSS"
-      puts "https://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track"
-      url = URI("https://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track")
+      puts "http://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track"
+      url = URI("http://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track")
       https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = true
+      https.use_ssl = ENV['SHIPENGINE_USE_SSL']
       request = Net::HTTP::Get.new(url)
       request["Host"] = ENV['SHIPENGINE_HOST']
       request["API-Key"] = ENV['SHIPENGINE_KEY']
