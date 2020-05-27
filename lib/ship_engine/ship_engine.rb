@@ -52,12 +52,12 @@ module ShipEngine
       #   nil
       # end
       puts "SSSSSSSS-------fetch_shipping_label_from_api--------SSSSSSSS"
-      url = URI("http://api.shipengine.com/v1/labels")
+      url = URI(ENV['SHIPENGINE_API'])
       https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = false
+      https.use_ssl = true
 
       request = Net::HTTP::Post.new(url)
-      request["Host"] = "api.shipengine.com"
+      request["Host"] = ENV['SHIPENGINE_HOST']
       request["API-Key"] = ENV['SHIPENGINE_KEY']
       request["Content-Type"] = "application/json"
       # request.body = "{\n  \"shipment\": {\n    \"service_code\": \"usps_priority_mail\",\n    \"ship_to\": {\n      \"name\": \"Jane Doe\",\n      \"address_line1\": \"525 S Winchester Blvd\",\n      \"city_locality\": \"San Jose\",\n      \"state_province\": \"CA\",\n      \"postal_code\": \"95128\",\n      \"country_code\": \"US\",\n      \"address_residential_indicator\": \"yes\"\n    },\n    \"ship_from\": {\n      \"name\": \"John Doe\",\n      \"company_name\": \"Example Corp\",\n      \"phone\": \"555-555-5555\",\n      \"address_line1\": \"4009 Marathon Blvd\",\n      \"city_locality\": \"Austin\",\n      \"state_province\": \"TX\",\n      \"postal_code\": \"78756\",\n      \"country_code\": \"US\",\n      \"address_residential_indicator\": \"no\"\n    },\n    \"packages\": [\n      {\n        \"weight\": {\n          \"value\": 20,\n          \"unit\": \"ounce\"\n        },\n        \"dimensions\": {\n          \"height\": 6,\n          \"width\": 12,\n          \"length\": 24,\n          \"unit\": \"inch\"\n        }\n      }\n    ]\n  }\n}"
@@ -120,15 +120,13 @@ module ShipEngine
           ],
           "service_code"=>"usps_priority_mail",
           "ship_to"=>{
-            "address_line1"=>"4009 Marathon Blvd",
+            "address_line1"=>"16012 Arthur St",
             "address_residential_indicator"=> "no",
-            "city_locality"=>"Austin",
-            "company_name"=> "Example Corp",
+            "city_locality"=>"Cerritos",
+            "company_name"=> "Fame and Partners – Returns",
             "country_code"=> "US",
-            "name"=>"John Doe",
-            "phone"=> "555-555-5555",
             "postal_code"=>"78756",
-            "state_province"=> "TX"
+            "state_province"=> "CA"
           },
           "ship_from"=> {
             "address_line1"=>@address_1,

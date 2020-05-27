@@ -10,32 +10,8 @@ namespace :newgistics do
     end
     current_time = Date.today.beginning_of_day.utc.to_datetime.to_s
     last_successful_run = scheduler.last_successful_run
-
-    # client = Newgistics::NewgisticsClient.new
-    # res = client.get_returns(last_successful_run, current_time)
-
-    ship_response = Hash.new
-    line_items = ItemReturn.where( 'requested_at'>last_successful_run)
-    index = 0
-    line_items.each do |return_it|
-      return_lable_id = return_it['item_return_label_id']
-       return_lable = ItemReturnLabel.where('id'== return_lable_id)
-       order_number = return_it['order_number']
-       if return_lable.has_key?('lable_pdf_url')
-         pdf = return_lable['lable_pdf_url']
-         array = pdf.split('/')
-         array.each do |a_it|
-           c = a_it
-           if  c.include?('pdf')
-             c = c.delete!'.pdf'
-             c = c.delete!'label-'
-             api = ShipEngine::ShippingLabelAPI.new
-             ship_response[order_number] = api.tracking_package(c)
-             index = index + 1
-           end
-         end
-       end
-    end
+    client = Newgistics::NewgisticsClient.new
+    res = client.get_returns(last_successful_run, current_time)
 
     # TODO REMOVE ME
     if Rails.env.production?
@@ -61,21 +37,6 @@ namespace :newgistics do
       #temp_file = File.new("export\\returnorder\\#{start_time.year}#{start_time.month}#{start_time.day}.csv", "w+")
       csv_file = CSV.open(temp_file, 'wb') do |csv|
         csv << csv_headers # set headers for csv
-        # ***************************************
-        ship_response.each do|return_key,return_value|
-          order_number = return_key
-          order = Spree::Order.find_by_number(order_number)
-          # if order.nil?
-          #   flag = true
-          #   puts "order is nil: " + item_return['orderID']
-          #   puts "order is nil after transform: " + order_id
-          #   csv << [item_return['orderID'], item_return['Name'], item_return['Address1'],
-          #           item_return['City'], item_return['State'], item_return['PostalCode'],item_return['Timestamp']]
-          #   next
-          # end
-
-        end
-
         response_returns.each do |item_return|
           order_id = item_return['orderID'].lstrip
           order_id = order_id.gsub(/[e]/, 'E')
@@ -153,7 +114,6 @@ namespace :newgistics do
             end
           end
         end
-      # ***************************************
       end
       if flag
         if Rails.env.production?
@@ -167,9 +127,6 @@ namespace :newgistics do
         temp_file.close
       end
     end
-
-
-
     scheduler.last_successful_run = current_time.to_s
     scheduler.save
   end
