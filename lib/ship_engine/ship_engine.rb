@@ -134,7 +134,7 @@ module ShipEngine
             "city_locality"=> @city,
             "country_code"=> @country,
             "name"=> full_name,
-            "postal_code"=>address.zipcode,
+            "postal_code"=>@zip,
             "state_province"=> @state
           }
         }
