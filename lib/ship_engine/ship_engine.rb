@@ -54,7 +54,7 @@ module ShipEngine
       puts "SSSSSSSS-------fetch_shipping_label_from_api--------SSSSSSSS"
       url = URI(ENV['SHIPENGINE_API'])
       https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = ENV['SHIPENGINE_USE_SSL']
+      https.use_ssl = ENV['SHIPENGINE_USE_SSL'] == true
 
       request = Net::HTTP::Post.new(url)
       request["Host"] = ENV['SHIPENGINE_HOST']
