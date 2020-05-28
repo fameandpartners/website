@@ -107,6 +107,9 @@ module ReturnsProcessesControllerHelper
     order = Spree::Order.find_by_number(order_number)
     ship_id = order.ship_address_id
     phone = Spree::Address.find_by_id(ship_id)
+    puts "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUship_id and phone number:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+    puts ship_id
+    puts phone
     puts "UUUUUUUUUUUUUUUUU-------ShipEngine::ShippingLabel.new before----------------UUUUUUUUUU"
     label = ShipEngine::ShippingLabel.new(
       order.user_first_name,

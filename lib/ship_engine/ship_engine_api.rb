@@ -9,7 +9,7 @@ module ShipEngine
       puts "http://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track"
       url = URI("http://api.shipengine.com/v1/labels/se-#{lable_id.to_s}/track")
       https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = ENV['SHIPENGINE_USE_SSL']
+      https.use_ssl = ENV['SHIPENGINE_USE_SSL'] == 'true'
       request = Net::HTTP::Get.new(url)
       request["Host"] = ENV['SHIPENGINE_HOST']
       request["API-Key"] = ENV['SHIPENGINE_KEY']
