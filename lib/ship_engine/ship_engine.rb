@@ -68,6 +68,7 @@ module ShipEngine
         convert_json_to_instance_variables(JSON.parse(response.read_body))
       else
         puts "SSSSSSSS-------fetch_shipping_label_from_api nil --------SSSSSSSS"
+        puts JSON.parse(response.read_body)
         nil
       end
     end
@@ -118,6 +119,7 @@ module ShipEngine
               }
             }
           ],
+          "carrier_id": "se-243802",
           "service_code"=>"usps_priority_mail",
           "ship_to"=>{
             "address_line1"=>"16012 Arthur St",
