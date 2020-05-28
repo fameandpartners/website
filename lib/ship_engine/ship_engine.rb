@@ -119,7 +119,7 @@ module ShipEngine
               }
             }
           ],
-          "carrier_id": "se-243802",
+          "carrier_id"=> "se-243802",
           "service_code"=>"usps_priority_mail",
           "ship_to"=>{
             "address_line1"=>"16012 Arthur St",
