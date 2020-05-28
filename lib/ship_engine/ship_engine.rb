@@ -9,7 +9,8 @@ module ShipEngine
                   :label_image_url,
                   :label_pdf_url,
                   :barcode
-    def initialize(first_name, last_name, address, email, return_id)
+
+    def initialize(first_name, last_name, address, email, return_id,phone)
       puts "SSSSSSSSSSSSSSSSSS-------ShippingLabel:initialize----------------SSSSSSSSSSSSSSSSSS"
       @first_name = first_name
       @last_name = last_name
@@ -22,6 +23,7 @@ module ShipEngine
       @zip = address.zipcode
       @return_id = return_id
       @address = address
+      @phone = phone
       puts first_name
       puts last_name
       puts email
@@ -137,7 +139,8 @@ module ShipEngine
             "country_code"=> @country,
             "name"=> full_name,
             "postal_code"=>@zip,
-            "state_province"=> @state
+            "state_province"=> @state,
+            "phone"=>@phone
           }
         }
       }

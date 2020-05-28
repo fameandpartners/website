@@ -105,13 +105,17 @@ module ReturnsProcessesControllerHelper
   def self.create_label(order_number)
     puts "UUUUUUUUUUUUUUUUU-------create_label----------------UUUUUUUUUU"
     order = Spree::Order.find_by_number(order_number)
+    ship_id = order.ship_address_id
+    phone = Spree::Address.find_by_id(ship_id)
     puts "UUUUUUUUUUUUUUUUU-------ShipEngine::ShippingLabel.new before----------------UUUUUUUUUU"
     label = ShipEngine::ShippingLabel.new(
       order.user_first_name,
       order.user_last_name,
       order.shipping_address,
       order.email,
-      order.number
+      order.number,
+      phone
+
     )
     puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api before----------------UUUUUUUUUU"
     if(label.fetch_shipping_label_from_api.nil?)
