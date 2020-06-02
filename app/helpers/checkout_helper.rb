@@ -12,11 +12,13 @@ module CheckoutHelper
         Spree::Country.all
       end
     end
-
+    puts "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC    countries CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+    puts countries
     countries.collect do |country|
       country.name = I18n.t(country.iso, :scope => 'country_names', :default => country.name)
       country
     end.sort { |a, b| a.name <=> b.name }
+
   end
 
   def available_states_for_current_zone
