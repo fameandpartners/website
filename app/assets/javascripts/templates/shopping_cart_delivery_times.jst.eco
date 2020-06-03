@@ -27,7 +27,7 @@
               data-line-item-index="<%= i %>"
             >
               <% for mo in product.available_making_options: %>
-                <% if product.name == 'Swatch' || (mo.name == "M60D"  || mo.name == "M12W" || mo.name == "M10W"): %>
+                <% if (mo.name == "M60D"  || mo.name == "M12W" || mo.name == "M10W" || mo.name == "M10W" ): %>
                   <div class="delivery-time-options-wrapper js-delivery-time-options-wrapper">
                     <div class="Radio">
                       <input
