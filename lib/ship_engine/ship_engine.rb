@@ -119,7 +119,7 @@ module ShipEngine
               },
               "weight"=>{
                 "unit"=>"ounce",
-                "value"=> 40.41
+                "value"=> 32.00
               }
             }
           ],
