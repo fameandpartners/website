@@ -166,7 +166,7 @@ Spree::Product.class_eval do
   end
 
   def site_price_for_export(currency)
-    self.master.get_price_in(currency)
+    self.master.get_price_in(currency)&.money.to_s
   end
 
   def update_price_conversions
