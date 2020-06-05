@@ -10,7 +10,7 @@ Spree::Admin::ProductsController.class_eval do
     csv_headers = ['Product Name', 'Product Style', 'Price', 'Manufacturer', 'Taxons']
     csv_file    = CSV.generate(write_headers: true, headers: csv_headers) do |csv|
       scope.each do |p|
-        csv << [p.name, p.sku, p.site_price_for(Spree::Config.currency), p.factory&.name, p.taxons.pluck(:name).join(',')]
+        csv << [p.name, p.sku, p.site_price_for_export("USD"), p.factory&.name, p.taxons.pluck(:name).join(',')]
       end
     end
 
