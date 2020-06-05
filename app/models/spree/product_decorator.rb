@@ -165,6 +165,10 @@ Spree::Product.class_eval do
     self.master.site_price_for(site_version)
   end
 
+  def site_price_for_export(currency)
+    self.master.get_price_in(currency)
+  end
+
   def update_price_conversions
     SiteVersion.where(default: false).each do |site_version|
       self.add_price_conversion(site_version.currency, site_version.exchange_rate)
