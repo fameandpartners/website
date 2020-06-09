@@ -50,7 +50,7 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
 
     for index of p.making_options
       $selection = $("#delivery_time_" + i + '_' + p.making_options[index].id)
-      unless $selection?
+      if $selection.length == 0
         continue
       else
         $selection.attr('checked', true)
