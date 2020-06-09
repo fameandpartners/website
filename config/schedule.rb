@@ -42,11 +42,11 @@ every(15.minutes) { rake 'data:refulfill_items' }
 #every(1.hour) { rake 'data:groom_batches'}
 
 # Newgistics scheduled tasks
-every(1.day) {
-  rake 'newgistics:upload_product_list' #Master file
-  rake 'newgistics:upload_return_list'  #External Orders file
-  rake 'newgistics:update_item_returns' #API for Inbound Returns
-}
+#every(1.day) {
+  #rake 'newgistics:upload_product_list' #Master file
+  #rake 'newgistics:upload_return_list'  #External Orders file
+  #rake 'newgistics:update_item_returns' #API for Inbound Returns
+#}
 # every(10.minutes) {
 #   rake 'newgistics:upload_return_list'  #External Orders file
 # }
