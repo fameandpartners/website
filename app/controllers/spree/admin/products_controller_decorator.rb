@@ -7,10 +7,10 @@ Spree::Admin::ProductsController.class_eval do
   def export_product_taxons
     scope = Spree::Product.includes(:taxons, :variants_including_master)
 
-    csv_headers = ['Product Name', 'Product Style', 'Taxons']
+    csv_headers = ['Product Name', 'Product Style', 'Price', 'Manufacturer', 'Taxons']
     csv_file    = CSV.generate(write_headers: true, headers: csv_headers) do |csv|
       scope.each do |p|
-        csv << [p.name, p.sku, p.taxons.pluck(:name).join(',')]
+        csv << [p.name, p.sku, p.site_price_for_export("USD"), p.factory&.name, p.taxons.pluck(:name).join(',')]
       end
     end
 
