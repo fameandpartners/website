@@ -50,7 +50,7 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
 
     for index of p.making_options
       $selection = $("#delivery_time_" + i + '_' + p.making_options[index].id)
-      if $selection
+      if $selection.length != 0
         $selection.attr('checked', true)
         $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
         break
