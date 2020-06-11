@@ -47,10 +47,13 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
   initCheckbox: (p, i) ->
     if p.making_options.length == 0
       return
-    
-    $selection = $("#delivery_time_" + i + '_' + p.making_options[0].id)
-    $selection.attr('checked', true)
-    $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
+
+    for index of p.making_options
+      $selection = $("#delivery_time_" + i + '_' + p.making_options[index].id)
+      if $selection.length != 0
+        $selection.attr('checked', true)
+        $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
+        break
 
   render: () ->
     @$container.html(@template(cart: @cart.data))
