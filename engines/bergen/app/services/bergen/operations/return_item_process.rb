@@ -44,7 +44,6 @@ module Bergen
       validates :return_request_item, presence: true
 
       def start_process
-        puts "UUUUUUUUUUUUUUUUU-------start_process----------------UUUUUUUUUU"
         if from_the_usa? && item_for_return?
           save!
         end

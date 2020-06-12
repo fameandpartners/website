@@ -99,9 +99,6 @@ include Newgistics::NewgisticsHelper
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
       @barcode = json['transporter']['Barcode'] # is actually the tracking number
-      puts "UUUUUUUUUUUUUUUUU-------@label_url:#{ @label_url}"
-      puts "UUUUUUUUUUUUUUUUU-------@carrier: #{ @carrier}"
-      puts "UUUUUUUUUUUUUUUUU-------@barcode:#{ @barcode}"
       json['links'].each do |link|
         if link['rel'] == 'label/image'
           @label_image_url = link['href']

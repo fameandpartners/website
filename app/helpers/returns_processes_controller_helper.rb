@@ -187,7 +187,6 @@ module ReturnsProcessesControllerHelper
   end
 
   def start_next_logistics_process(order_return)
-    puts "UUUUUUUUUUUUUUUUU-------start_next_logistics_process----------------UUUUUUUUUU"
     if Features.active?(:next_logistics)
       NextLogistics::ReturnRequestProcess.new(order_return_request: order_return).start_process
     end
