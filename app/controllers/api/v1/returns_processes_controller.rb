@@ -79,10 +79,13 @@ module Api
           return
         end
         if (has_us_shipping_address?(request_object[:order_number]))
+          puts "SSSSSSSSSSSSS ReturnsProcessesControllerHelper.create_label before SSSSSSSSSSSSSSSSS"
           unless(return_label = ReturnsProcessesControllerHelper.create_label(request_object[:order_number]))
+            puts "SSSSSSSSSSSSS ReturnsProcessesControllerHelper.create_label after error SSSSSSSSSSSSSSSSS"
             error_response(:RETRY, :LABEL_FAILED)
             return
           end
+          puts "SSSSSSSSSSSSS ReturnsProcessesControllerHelper.create_label after SSSSSSSSSSSSSSSSS"
         end
 
         process_returns(request_object, return_label)

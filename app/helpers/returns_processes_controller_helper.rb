@@ -1,3 +1,4 @@
+require 'ship_engine/ship_engine'
 module ReturnsProcessesControllerHelper
 
   ERROR_MESSAGES = {
@@ -64,7 +65,8 @@ module ReturnsProcessesControllerHelper
   end
 
   def process_returns(obj, return_label)
-		order = Spree::Order.find_by_number(obj[:order_number])
+    puts "UUUUUUUUUUUUUUUUU-------process_returns ----------------UUUUUUUUUU"
+    order = Spree::Order.find_by_number(obj[:order_number])
 
 		if order.nil?
 			return
@@ -76,18 +78,19 @@ module ReturnsProcessesControllerHelper
         :return_request_items_attributes => obj[:line_items]
       }
     }
-    puts "OrderReturnRequest.new"
+
+    puts "UUUUUUUUUUUUUUUUU-------OrderReturnRequest.new ----------------UUUUUUUUUU"
     @order_return = OrderReturnRequest.new(return_request[:order_return_request])
 
     @order_return.save
-
+    puts "UUUUUUUUUUUUUUUUU-------@order_return.save ----------------UUUUUUUUUU"
     if (has_us_shipping_address?(order.number))
       return_label.save
       @order_return.return_request_items.each do |x|
         x.item_return.item_return_label = return_label
         x.item_return.save!
       end
-
+      puts "UUUUUUUUUUUUUUUUU-------if (has_us_shipping_address?(order.number)) @order_return.save ----------------UUUUUUUUUU"
       @order_return.save
     end
 
@@ -100,19 +103,28 @@ module ReturnsProcessesControllerHelper
 
 
   def self.create_label(order_number)
+    puts "UUUUUUUUUUUUUUUUU-------create_label----------------UUUUUUUUUU"
     order = Spree::Order.find_by_number(order_number)
-
-    label = Newgistics::ShippingLabel.new(
+    ship_id = order.ship_address_id
+    phone = Spree::Address.find_by_id(ship_id).phone
+    puts "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUship_id and phone number:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+    puts ship_id
+    puts phone
+    puts "UUUUUUUUUUUUUUUUU-------ShipEngine::ShippingLabel.new before----------------UUUUUUUUUU"
+    label = ShipEngine::ShippingLabel.new(
       order.user_first_name,
       order.user_last_name,
       order.shipping_address,
       order.email,
-      order.number
-    )
+      order.number,
+      phone
 
+    )
+    puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api before----------------UUUUUUUUUU"
     if(label.fetch_shipping_label_from_api.nil?)
       return nil
     end
+    puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api  after----------------UUUUUUUUUU"
     item_return_label = ItemReturnLabel.new(
       :label_image_url => label.label_image_url,
       :label_pdf_url => label.label_pdf_url,
@@ -120,6 +132,12 @@ module ReturnsProcessesControllerHelper
       :carrier => label.carrier,
       :barcode => label.barcode
       )
+    puts "/n/n/n"
+    puts "label_image_url#{label.label_image_url}"
+    puts "label_image_url#{label.label_pdf_url}"
+    puts "/n/n/n"
+    puts "UUUUUUUUUUUUUUUUU-------ItemReturnLabel  create----------------UUUUUUUUUU"
+    item_return_label
   end
 
   def error_response(err, *err_code)
@@ -147,6 +165,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def success_response(request_id)
+    puts "UUUUUUUUUUUUUUUUU-------success_response----------------UUUUUUUUUU"
     payload = {
 			request_id: request_id,
       status: 200
@@ -159,6 +178,7 @@ module ReturnsProcessesControllerHelper
   end
 
   def start_bergen_return_process(order_return)
+    puts "UUUUUUUUUUUUUUUUU-------start_bergen_return_process----------------UUUUUUUUUU"
     order_return.return_request_items.each do |rri|
       Bergen::Operations::ReturnItemProcess.new(return_request_item: rri).start_process
     end

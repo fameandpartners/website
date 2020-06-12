@@ -23,7 +23,10 @@ include Newgistics::NewgisticsHelper
     end
 
     def fetch_shipping_label_from_api
+      puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api----------------UUUUUUUUUU"
       uri = URI(configatron.newgistics.uri)
+      puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api URL----------------UUUUUUUUUU"
+      puts "#{configatron.newgistics.uri}"
       request = Net::HTTP::Post.new(
         uri,
         {
@@ -32,14 +35,21 @@ include Newgistics::NewgisticsHelper
           'x-api-key' => configatron.newgistics.api_key
         }
       )
+      puts "configatron.newgistics.api_key"
+      puts "#{configatron.newgistics.api_key}"
       request.body = make_request_map.to_json
-
+      puts "UUUUUUUUUUUUUUUUU-------request.body"
+      puts request.body
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = (uri.scheme == "https")
       response = http.request(request)
       if(response.kind_of? Net::HTTPSuccess)
+        puts "UUUUUUUUUUUUUUUUU-------Net::HTTPSuccess"
+        puts "UUUUUUUUUUUUUUUUU-------response"
+        puts response.body
         convert_json_to_instance_variables(JSON.parse(response.body))
       else
+        puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api return nil ----------------UUUUUUUUUU"
         nil
       end
     end
@@ -85,10 +95,10 @@ include Newgistics::NewgisticsHelper
     end
 
     def convert_json_to_instance_variables(json)
+      puts "UUUUUUUUUUUUUUUUU-------convert_json_to_instance_variables return nil ----------------UUUUUUUUUU"
       @label_url = json['labelURL']
       @carrier = json['transporter']['Carrier']
       @barcode = json['transporter']['Barcode'] # is actually the tracking number
-
       json['links'].each do |link|
         if link['rel'] == 'label/image'
           @label_image_url = link['href']

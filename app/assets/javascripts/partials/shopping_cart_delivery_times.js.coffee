@@ -55,6 +55,9 @@ window.ShoppingCartDeliveryTimes = class ShoppingCartDeliveryTimes
         $selection.closest('.js-delivery-time-options-wrapper').addClass('is-selected')
         break
 
+
+
+
   render: () ->
     @$container.html(@template(cart: @cart.data))
 
