@@ -4,8 +4,8 @@ describe Spree::UserMailer do
   context "#reset_password_instructions - customerio" do
     before(:each) { Features.activate(:new_account) }
 
-    let(:user) { build(:spree_user) }
-    let(:expected_attributes) { { password_reset_link: 'http://localhost/account/forgot-password/token/', email_to: user.email} }
+    let(:user) { build(:spree_user, email: 'loroteiro@silvestre.com') }
+    let(:expected_attributes) { { password_reset_link: 'http://localhost/account/forgot-password/token/', email_to: 'loroteiro@silvestre.com'} }
 
 
     it "sends data to customer io correctly" do
