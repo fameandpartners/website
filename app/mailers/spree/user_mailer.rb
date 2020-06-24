@@ -28,7 +28,8 @@ class Spree::UserMailer < ActionMailer::Base
       Marketing::CustomerIOEventTracker.new.track(
         user,
         'account_password_reset',
-        password_reset_link: @edit_password_reset_url
+        password_reset_link: @edit_password_reset_url,
+        email_to:           user.email
       )
     else
       # Slim file
