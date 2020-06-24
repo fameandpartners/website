@@ -29,7 +29,7 @@ class Spree::UserMailer < ActionMailer::Base
         user,
         'account_password_reset',
         password_reset_link: @edit_password_reset_url,
-        email:           user.email
+        email_to:           @user.email
       )
     else
       # Slim file
