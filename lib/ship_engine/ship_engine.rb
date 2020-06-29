@@ -32,6 +32,7 @@ module ShipEngine
       puts address.address2
       puts address.city
       puts address.state&.abbr
+      puts @return_id
     end
 
     def fetch_shipping_label_from_api
@@ -122,7 +123,7 @@ module ShipEngine
                 "unit"=>"ounce",
                 "value"=> 32.00
               },
-              "label_messages"=>@return_id.to_s,
+              "label_messages"=>{"reference1":@return_id},
             }
           ],
           "carrier_id"=> "se-243802",
