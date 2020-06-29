@@ -118,7 +118,7 @@ module ReturnsProcessesControllerHelper
       order.email,
       order.number,
       phone,
-      order.id
+      order.id.to_s
 
     )
     puts "UUUUUUUUUUUUUUUUU-------fetch_shipping_label_from_api before----------------UUUUUUUUUU"
