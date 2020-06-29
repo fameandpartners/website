@@ -122,7 +122,7 @@ module ShipEngine
                 "unit"=>"ounce",
                 "value"=> 32.00
               },
-              "label_messages"=>@return_id,
+              "label_messages"=>@return_id.to_s,
             }
           ],
           "carrier_id"=> "se-243802",
