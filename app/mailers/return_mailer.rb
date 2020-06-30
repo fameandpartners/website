@@ -63,7 +63,8 @@ class ReturnMailer < ActionMailer::Base
           "zipcode": billing_address&.zipcode
         },
         "items": formatted_return_items,
-        "international_user": international_user
+        "international_user": international_user,
+        "currency":order.currency
       }
     end
 end

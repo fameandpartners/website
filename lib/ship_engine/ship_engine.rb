@@ -10,7 +10,7 @@ module ShipEngine
                   :label_pdf_url,
                   :barcode
 
-    def initialize(first_name, last_name, address, email, return_id,phone)
+    def initialize(first_name, last_name, address, email, return_id,phone,order_id)
       puts "SSSSSSSSSSSSSSSSSS-------ShippingLabel:initialize----------------SSSSSSSSSSSSSSSSSS"
       @first_name = first_name
       @last_name = last_name
@@ -24,6 +24,7 @@ module ShipEngine
       @return_id = return_id
       @address = address
       @phone = phone
+      @order_id = order_id
       puts first_name
       puts last_name
       puts email
@@ -31,6 +32,7 @@ module ShipEngine
       puts address.address2
       puts address.city
       puts address.state&.abbr
+      puts @return_id
     end
 
     def fetch_shipping_label_from_api
@@ -120,7 +122,8 @@ module ShipEngine
               "weight"=>{
                 "unit"=>"ounce",
                 "value"=> 32.00
-              }
+              },
+              "label_messages"=>{"reference1":@return_id},
             }
           ],
           "carrier_id"=> "se-243802",
