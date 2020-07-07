@@ -16,6 +16,8 @@ module Api
         ensure_params_exist
 
         @user = Spree::User.find_for_authentication(:email => params[:spree_user][:email])
+        puts("hhhhhhhhhhhhhhhh")
+        puts(@user.encrypted_password)
         return invalid_login_attempt unless @user
 
         if @user.valid_password?(params[:spree_user][:password])
@@ -85,6 +87,8 @@ module Api
 
         @user = Spree::User.find_for_database_authentication(:reset_password_token => params[:token])
         if @user.present? and @user.reset_password_period_valid?
+          puts("hhhhhhhhhhhhhhhh")
+          puts(@user.encrypted_password)
           if @user.reset_password!(params[:password], params[:password])
             sign_in("spree_user", @user)
             respond_with @user
